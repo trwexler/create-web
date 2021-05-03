@@ -4,6 +4,19 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     // register new user accounts
+
+    viewAll: (req, res) =>{
+        User.find({})
+            .then((allUsers)=>{
+                console.log(allUsers);
+                res.json(allUsers);
+            })
+            .catch((err)=>{
+                console.log("error in ViewAll");
+                res.status(400).json(err);
+            })
+
+    },
     register: (req, res) => {
         const user = new User(req.body);
         console.log(user);

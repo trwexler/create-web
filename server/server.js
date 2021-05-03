@@ -23,6 +23,7 @@ require('./config/mongoose.config');
 // add in the routes
 
 require('./routes/user.routes')(app);
+require('./routes/post.routes')(app);
 
 const server = app.listen(port, () => console.log("Successfully connected on port " + port));
 

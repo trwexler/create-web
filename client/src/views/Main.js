@@ -17,12 +17,6 @@ const Main = (props)=>{
             <Header/>
             <Register/>
             <Login/>
-            {/* <Router>
-            <Feed path="/feed"/>
-            <UserPage path="user/:id"/>
-            </Router> */}
-
-
         </div>
     )
 }

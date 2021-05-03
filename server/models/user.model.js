@@ -17,7 +17,19 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Password field is required!"],
         minLength: [8, "Password must be at least 8 characters!"]
-    }
+    },
+
+    profilePicture: {
+        type: String,
+        default: "client\src\components\profilepic.svg"
+    },
+
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+        }
+    ]
 }, { timestamps: true});
 
 // we want to validate password === confirmPassword, but we don't want this in our DB!
