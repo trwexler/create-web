@@ -55,37 +55,34 @@ const Register = (props)=>{
 
     return(
         <>
-            <h1 className="text-3xl font-bold p-2">Register</h1>
-            <p className="text-sm font-semibold">Start Creating and collaborating today!</p>
+            <h1 className="text-3xl p-2">new here?</h1>
+            <p className="text-sm font-semibold">Register and start creating and collaborating today!</p>
             {
                 confirmReg ? 
                 <h4 className="text-green-300">{confirmReg}</h4>
                 : null
             }
 
-            <form onSubmit={submitHandler}>
+            <form className="flex flex-col bg-white w-9/12 my-2 mx-auto p-5 shadow rounded" onSubmit={submitHandler}>
 
-                <label className="px-5 font-semibold">Email</label>
-                <input className="border rounded my-1" type="text" name="email" value={newUser.email}
+                <input className="border rounded my-1" placeholder="Email" type="text" name="email" value={newUser.email}
                     onChange={handleChange}
                 />
 
-                <label className="px-5 font-semibold">Username</label>
-                <input className="border rounded my-1" type="text" name="username" value={newUser.username}
+                <input className="border rounded my-1" placeholder="Username" type="text" name="username" value={newUser.username}
                     onChange={handleChange}
                 />
 
-                <label className="px-5 font-semibold">Password</label>
-                <input className="border rounded my-1" type="text" name="password" value={newUser.password}
+                <input className="border rounded my-1" placeholder="Password" type="password" name="password" value={newUser.password}
                     onChange={handleChange}
                 />
 
-                <label className="px-5 font-semibold">Confirm Password</label>
-                <input className="border rounded my-1" type="text" name="confirmPassword" value={newUser.confirmPassword}
+                <input className="border rounded my-1" placeholder="Confirm Password" type="password" name="confirmPassword" value={newUser.confirmPassword}
                     onChange={handleChange}
                 />
+                <br/>
 
-                <input className="m-3 p-4" type="submit" value="Register"/>
+                <input className="mx-auto my-3 p-3 rounded shadow-md w-24" type="submit" value="Register"/>
 
             </form>
 

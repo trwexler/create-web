@@ -30,13 +30,13 @@ const login = event => {
 
 return (
     <div>
-        <h1 className="text-3xl font-bold p-2">Login</h1>
+        <h1 className="text-4xl font-largeText p-2">create(Web)</h1>
         <p className="error-text">{errorMessage ? errorMessage : ""}</p>
-        <form onSubmit={login}>
+        <form className="flex flex-col bg-white w-9/12 mx-auto my-4 p-5 shadow rounded" onSubmit={login}>
         <div>
-            <label className="px-5 font-semibold">Email</label>
             <input
             className="border rounded my-1"
+            placeholder="Email"
             type="text"
             name="email"
             value={email}
@@ -44,16 +44,16 @@ return (
             />
         </div>
         <div>
-            <label className="px-5 font-semibold">Password</label>
             <input
             className="border rounded my-1" 
+            placeholder="Password"
             type="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             />
         </div>
-        <input className="m-3 p-4" type="submit"/>
+        <input className="mx-auto my-3 p-3 rounded shadow-md w-24" type="submit" value="Login"/>
         </form>
     </div>
     );

@@ -14,9 +14,10 @@ const Main = (props)=>{
 
     return(
         <div>
-            <Header/>
-            <Register/>
+            {/* <Header/> */}
             <Login/>
+            <Register/>
+            
         </div>
     )
 }
