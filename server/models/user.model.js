@@ -21,7 +21,26 @@ const UserSchema = new mongoose.Schema({
 
     profilePicture: {
         type: String,
-        default: "client\src\components\profilepic.svg"
+        default: "C:/Users/Thomas/Desktop/CodingDojo/create-web/client/src/components/profilepic.svg"
+    },
+
+    bio: {
+        type: String,
+        default: "Personalize your bio!"
+    },
+
+    webs: {
+        type: String,
+        enum: [
+            'Writer',
+            'Writer - Looking for work!',
+            'Editor',
+            'Editor - Looking for work!',
+            'Looking for team-writing',
+            'Publisher',
+            'Just browsing!',
+            'Looking for feedback'
+        ],
     },
 
     posts: [

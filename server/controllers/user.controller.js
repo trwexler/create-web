@@ -17,6 +17,21 @@ module.exports = {
             })
 
     },
+
+    getOne: (req, res) => {
+        console.log(req.params.id);
+        User.findById(req.params.id)
+            .then((oneUser) => {
+            console.log("in get one user");
+            // console.log(oneMovie);
+            res.json(oneUser);
+            })
+            .catch((err) => {
+            console.log("error found in getOne");
+            res.status(400).json(err);
+            })
+    },
+    
     register: (req, res) => {
         const user = new User(req.body);
         console.log(user);
@@ -60,7 +75,8 @@ module.exports = {
                                 .json({ //added onto cookie to output json
                                     message: "Successfully Logged In",
                                     userLoggedIn: {
-                                        username: userRecord.username
+                                        username: userRecord.username,
+                                        _id: userRecord._id,
                                     }
                                 })
 

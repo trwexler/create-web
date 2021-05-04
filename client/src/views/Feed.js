@@ -30,18 +30,51 @@ const Feed = (props)=>{
     },[])
 
 
+    const [newPost, setNewPost] = useState({
+        content:"",
+        likes:0,
+        user_id: ""
+    });
+
+    //get single user
+    const submitHandler = (e)=>{
+        axios.post('http://localhost:8000/api/post',
+        {
+            withCredentials: true
+        })
+            .then((res)=>{
+                console.log(res.data);
+                setNewPost({
+                    content:res.data.content,
+                    likes:res.data.likes,
+                    user_id: res.data.user_id
+                });
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+    }
+
+
+
+
     return(
         <div>
             <Header/>
             {/* will have to map through messages. This is format though: */}
 
+            <form>
+                <label>Share your latest with us!</label>
+                <input type="text" name="post"/>
+                <button>Post</button>
+            </form>
             {
                 post.map((aPost, index)=>(
                     <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index+aPost._id}>
 
                         <div className="flex">
-                            <img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/>
-                            <p className="text-gray-500 font-semibold mt-2">{aPost.user_id.username}</p>
+                            <Link to={`/profile/${aPost.user_id._id}`}><img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/></Link>
+                            <Link to={`/profile/${aPost.user_id._id}`}><p className="text-gray-500 font-semibold mt-2">{aPost.user_id.username}</p></Link>
                         </div>
 
                         <p className="text-sm text-left text-white p-2">{aPost.content}</p>
@@ -54,12 +87,6 @@ const Feed = (props)=>{
                     </div>
                 ))
             }
-
-
-<Upload/>
-
-
-
             
         </div>
     )

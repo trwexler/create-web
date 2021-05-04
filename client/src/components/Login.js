@@ -19,8 +19,8 @@ const login = event => {
     .then((res) => {
         console.log(res.cookie);
         console.log(res);
-        console.log(res.data, 'is res data!');
-        navigate('/feed');
+        console.log(res.data.userLoggedIn._id, 'is res data!');
+        navigate(`/feed/${res.data.userLoggedIn._id}`);
     })
     .catch(err => {
         console.log(err.response);
