@@ -82,8 +82,10 @@ const Edit = (props)=>{
                 value={editUser.webs}> */}
                 {
                     webList.map((webs,index)=>(
+                        <div> 
                         <input onChange={checkBoxChange} type="checkbox" name="webs" 
                         value={webs} key={'webs'+index}/>
+                        {webs}</div>
                     ))
                 }
 

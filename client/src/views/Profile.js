@@ -13,17 +13,24 @@ const Profile = (props) =>{
 
     const {profileId} = props;
     const [userProfile, setUserProfile] = useState({});
+    const [webList, setWebList] = useState([]);
 
     useEffect(()=>{
         axios.get('http://localhost:8000/api/user/' + profileId)
             .then((res)=>{
                 console.log(res.data);
                 setUserProfile(res.data);
+                console.log(res.data.webs);
+                setWebList(res.data.webs);
             })
             .catch((err)=>{
                 console.log(err);
             })
     }, [])
+
+
+
+
 
     return(
         <div>
@@ -31,10 +38,9 @@ const Profile = (props) =>{
 
 
             {
+                //Will run if the user is on his/her own page
                 props.profileId == props.currentId
-
                 ?
-
                 <div>
                     <div className="bg-white shadow">
                         <img src="" alt=""/>
@@ -43,13 +49,31 @@ const Profile = (props) =>{
                         <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
                     <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
-                        <h3 className="text-xl p-3">Weave your webs!</h3>
-                        <p>{userProfile.webs}</p>
+                        <h3 className="text-xl p-3">Your Webs</h3>
+
+                {/* Runs if user is on his/her own page and hasn't added webs. */}
+                        {
+                            props.profileId == props.currentId
+                            && userProfile.webs == "" ?
+                            <p>Add to your webs!</p>
+                            :null
+                        }
+                        
+                        {
+                            webList.map((web, index)=>(
+                                <p className="block">{web}</p>
+                            ))
+                        }
+
+                        {/* <p>{userProfile.webs}</p> */}
+
+
+
                         <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
-
                 </div>
-
+                
+                //Runs if user is NOT on their page
                 :
                 
                 <div>
@@ -60,6 +84,15 @@ const Profile = (props) =>{
                     </div>
                     <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
                         <h3 className="text-xl p-3">{userProfile.username}'s webs!</h3>
+                {/* Runs if user is not on their page
+                and they haven't added any webs. */}
+                        {
+                            props.profileId !== props.currentId
+                            && userProfile.webs == "" ?
+                            <p>{userProfile.username} hasn't added any webs yet!</p>
+                            :null
+                        }
+
                         <p>{userProfile.webs}</p>
                     </div>   
                 </div>
