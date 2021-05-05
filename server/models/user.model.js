@@ -30,18 +30,8 @@ const UserSchema = new mongoose.Schema({
     },
 
     webs: {
-        type: String,
-        default: "Weave your webs!",
-        enum: [
-            'Writer',
-            'Writer - Looking for work!',
-            'Editor',
-            'Editor - Looking for work!',
-            'Looking for team-writing',
-            'Publisher',
-            'Just browsing!',
-            'Looking for feedback'
-        ],
+        type: [String],
+        default: "Weave your webs!"
     },
 
     posts: [

@@ -31,6 +31,24 @@ module.exports = {
             res.status(400).json(err);
             })
     },
+
+    edit: (req, res) => {
+        console.log(req.params.id);
+    
+        User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,  // give me the new version...not the original
+            runValidators: true,  // by default mongoose will NOT validate on updates
+        })
+            .then((editedMovie) => {
+            console.log("in edit movie");
+            // console.log(updatedMovie);
+            res.json(editedMovie);
+            })
+            .catch((err) => {
+            console.log("error found in edit");
+            res.status(400).json(err);
+            })
+    },
     
     register: (req, res) => {
         const user = new User(req.body);

@@ -103,50 +103,45 @@ const Feed = (props)=>{
                 <br/>
                 <button className="mx-auto my-3 p-3 rounded shadow-md w-24">Post</button>
             </form>
+
             <div className="flex flex-col-reverse">
-
             {
-                post.map((aPost, index)=>(
-                    
-                    <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index+aPost._id}>
+            post.map((aPost, index)=>(
+                
+                <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index+aPost._id}>
 
-                        <div className="flex">
-                            <Link to={`/profile/${aPost.user_id._id}/${user._id}`}><img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/></Link>
+                    <div className="flex">
+                        <Link to={`/profile/${aPost.user_id._id}/${user._id}`}><img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/></Link>
 
 {/* Fixed to allow user name to show upon change 
 (aPost.username) and remains in memory upon 
 refresh (aPost.user_id.username).
 Needs better solution. */}
-                            {
-
-                            aPost.username ?
-                            
-                            <Link to={`/profile/${aPost.user_id._id}/${props.currentId}`}>
-                            <p className="text-gray-500 font-semibold mt-2">
-                            {aPost.username}
-                            </p></Link>
-                            
-                            :<Link to={`/profile/${aPost.user_id._id}`}>
-                            <p className="text-gray-500 font-semibold mt-2">
-                            {aPost.user_id.username}
-                            </p></Link>
-
-                            }
-
-
-                        </div>
-
-                        <p className="text-sm text-left text-white p-2">{aPost.content}</p>
-
-                        <div className="flex justify-center">
-                            <p className=" m-1">Like</p>
-                            <img className="w-4 m-1" src={like} alt="UPVOTE"/>
-                        </div>
-
-                    </div>
+                {
                     
-                ))
-            }
+                aPost.username ?
+                
+                <Link to={`/profile/${aPost.user_id._id}/${user._id}`}>
+                <p className="text-gray-500 font-semibold mt-2">
+                {aPost.username}
+                </p></Link>
+                
+                :<Link to={`/profile/${aPost.user_id._id}/${user._id}`}>
+                <p className="text-gray-500 font-semibold mt-2">
+                {aPost.user_id.username}
+                </p></Link>
+
+                }
+                    </div>
+
+                    <p className="text-sm text-left text-white p-2">{aPost.content}</p>
+
+                    <div className="flex justify-center">
+                        <p className=" m-1">Like</p>
+                        <img className="w-4 m-1" src={like} alt="UPVOTE"/>
+                    </div>
+                </div> 
+            ))}
             </div>
             
         </div>

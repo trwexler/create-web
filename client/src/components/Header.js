@@ -10,7 +10,7 @@ const Header = (props)=>{
 
     return(
         <>
-            <nav className="bg-gray-100">
+            <nav className="bg-gray-100 ">
                 <ul className="flex justify-between p-5 border ">
                     <img className="w-10" src={home}  alt=""/>
                     <li className="hidden lg:flex border">2</li>

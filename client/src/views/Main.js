@@ -14,7 +14,6 @@ const Main = (props)=>{
 
     return(
         <div>
-            {/* <Header/> */}
             <Login/>
             <Register/>
             
