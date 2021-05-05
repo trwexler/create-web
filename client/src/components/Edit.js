@@ -51,6 +51,24 @@ const Edit = (props)=>{
         setEditUser(newStateObject);
     }
 
+
+    const checkBoxChange= (e) => {
+        let newCheckBox = { ...editUser };
+        let webPresent = editUser.webs.indexOf(e.target.value);
+
+
+        if(webPresent == -1){
+            console.log(webPresent);
+            newCheckBox[e.target.name].push(e.target.value);
+            setEditUser(newCheckBox);
+        }
+        else{
+            console.log(webPresent);
+
+        }
+    }
+
+
     return(
         <div>
             <form onSubmit={submitHandler}>
@@ -59,22 +77,17 @@ const Edit = (props)=>{
                 type="text" placeholder="bio" 
                 value={editUser.bio}/>
 
-                <select onChange={inputChange} 
+                {/* <label onChange={inputChange} 
                 name="webs" 
-                type="text" 
-                placeholder="webs" 
-                value={editUser.webs}>
+                value={editUser.webs}> */}
+                {
+                    webList.map((webs,index)=>(
+                        <input onChange={checkBoxChange} type="checkbox" name="webs" 
+                        value={webs} key={'webs'+index}/>
+                    ))
+                }
 
-                    <option value=""></option>
-                    {
-                        webList.map((web,index)=>(
-                            <option value={web} key={'web'+index}>
-                            {web}
-                            </option>
-                        ))
-                    }
 
-                </select>
                 <br/>
 
 

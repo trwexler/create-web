@@ -28,12 +28,7 @@ const Profile = (props) =>{
     return(
         <div>
             <Header/>
-{/* 
-            <div className="bg-white shadow">
-                <img src="" alt=""/>
-                <h2 className="text-2xl p-3">{userProfile.username}</h2>
-                <p className="text-sm">{userProfile.bio}</p>
-            </div> */}
+
 
             {
                 props.profileId == props.currentId

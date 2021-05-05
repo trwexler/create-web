@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema({
 
     webs: {
         type: [String],
-        default: "Weave your webs!"
     },
 
     posts: [
