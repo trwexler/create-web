@@ -21,7 +21,7 @@ function App() {
       <Router>
         <Main default/>
         <Feed path="/feed/:currentId"/>
-        <Profile path = "/profile/:profileId"/>
+        <Profile path = "/profile/:profileId/:currentId"/>
       </Router>
 
     </div>
