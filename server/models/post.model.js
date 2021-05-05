@@ -16,7 +16,13 @@ likes: {
 user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-} 
+},
+
+username:{
+    type: String
+}
+
+
 
 }, { timestamps: true })
 

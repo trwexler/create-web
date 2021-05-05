@@ -7,6 +7,7 @@ module.exports = {
     viewAll: (req, res) => {
         Post.find({})
             // .sort({ postDate : "descending" })
+            // .sort({'_id': 'asc'})
             .populate("user_id")
             .then((allPost) => {
                 console.log("in all post");
