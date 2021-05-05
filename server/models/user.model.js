@@ -31,6 +31,7 @@ const UserSchema = new mongoose.Schema({
 
     webs: {
         type: String,
+        default: "Weave your webs!",
         enum: [
             'Writer',
             'Writer - Looking for work!',

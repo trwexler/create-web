@@ -30,7 +30,7 @@ const login = event => {
 
 return (
     <div>
-        <h1 className="text-4xl font-largeText p-2">create(Web)</h1>
+        <h1 className="text-4xl  p-2">create(Web)</h1>
         <p className="error-text">{errorMessage ? errorMessage : ""}</p>
         <form className="flex flex-col bg-white w-9/12 mx-auto my-4 p-5 shadow rounded" onSubmit={login}>
         <div>

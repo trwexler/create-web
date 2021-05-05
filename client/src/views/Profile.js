@@ -12,11 +12,11 @@ import Upload from '../components/Upload';
 
 const Profile = (props) =>{
 
-    const {id} = props;
+    const {profileId} = props;
     const [user, setUser] = useState({});
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/user/' +props.id)
+        axios.get('http://localhost:8000/api/user/' + profileId)
             .then((res)=>{
                 console.log(res.data);
                 setUser(res.data);
@@ -29,13 +29,23 @@ const Profile = (props) =>{
     return(
         <div>
             <Header/>
-            {/* <img src={user.profilePicture} alt=""/> */}
 
-            <div>
-                {user.bio}
-
+            <div className="bg-white shadow">
+                <img src="" alt=""/>
+                <h2 className="text-2xl p-3">{user.username}</h2>
+                <p className="text-sm">{user.bio}</p>
             </div>
-            
+
+            {
+
+            }
+
+            <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
+                <h3 className="text-xl p-3">Weave your webs!</h3>
+                <p>{user.webs}</p>
+
+                
+            </div>            
 
         </div>
     )
