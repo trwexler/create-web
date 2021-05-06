@@ -13,7 +13,14 @@ likes: {
     default: 0
 },
 
-user_id: {
+profile_user_id: {
+    type: String,
+    required: [true],
+},
+
+
+
+posting_user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
 },
