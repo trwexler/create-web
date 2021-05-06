@@ -71,6 +71,8 @@ const Edit = (props)=>{
 
     return(
         <div>
+
+        <Header id={props.currentId}/>
             <form onSubmit={submitHandler}>
 
                 <input onChange={inputChange} name="bio" 

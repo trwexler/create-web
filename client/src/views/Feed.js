@@ -94,7 +94,7 @@ const Feed = (props)=>{
 
     return(
         <div>
-            <Header/>
+            <Header id={props.currentId}/>
             {/* will have to map through messages. This is format though: */}
 
             <form onSubmit={submitHandler}>
@@ -116,12 +116,15 @@ const Feed = (props)=>{
 {/* Fixed to allow user name to show upon change 
 (aPost.username) and remains in memory upon 
 refresh (aPost.user_id.username).
-Needs better solution. */}
+Needs better solution. 
+Currently prevents users from viewing 
+the profile of a post that just appeared
+*/}
                 {
-                    
+
                 aPost.username ?
                 
-                <Link to={`/profile/${aPost.user_id._id}/${user._id}`}>
+                <Link to={`/profile/${aPost.user_id}/${user._id}`}>
                 <p className="text-gray-500 font-semibold mt-2">
                 {aPost.username}
                 </p></Link>

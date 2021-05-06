@@ -34,7 +34,7 @@ const Profile = (props) =>{
 
     return(
         <div>
-            <Header/>
+            <Header id={props.currentId}/>
 
 
             {
@@ -93,7 +93,11 @@ const Profile = (props) =>{
                             :null
                         }
 
-                        <p>{userProfile.webs}</p>
+                        {
+                            webList.map((web, index)=>(
+                                <p className="block">{web}</p>
+                            ))
+                        }
                     </div>   
                 </div>
 
