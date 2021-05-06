@@ -8,7 +8,6 @@ module.exports = {
         Comment.find({})
             // .sort({ commentDate : "descending" })
             // .sort({'_id': 'asc'})
-            .populate("posting_user_id")
                 .then((allComment) => {
                     console.log("in all comment");
                     // console.log(allComment);
@@ -16,6 +15,20 @@ module.exports = {
                     })
                 .catch((err) => {
                     console.log("error found in viewAll comment");
+                    res.status(400).json(err);
+                })
+    },
+    
+// Trying on front end... should really be a back-end process...
+    viewUserComments: (req, res) => {
+        Comment.find({profile_user_id: req.params.profile_user_id})
+                .then((userComments) => {
+                    console.log("in all comment");
+                    // console.log(allComment);
+                    res.json(userComments);
+                    })
+                .catch((err) => {
+                    console.log("error found in view user comments");
                     res.status(400).json(err);
                 })
     },
