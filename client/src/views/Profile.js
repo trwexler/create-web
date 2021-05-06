@@ -14,6 +14,23 @@ const Profile = (props) =>{
     const {profileId} = props;
     const [userProfile, setUserProfile] = useState({});
     const [webList, setWebList] = useState([]);
+    const [comments, setComments] = useState([]);
+
+    useEffect(()=>{
+        axios.get('http://localhost:8000/api/comment/' + profileId,
+        {
+            withCredentials: true
+        })
+            .then((res)=>{
+                console.log(res.data);
+                setComments(res.data);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+    },[])
+
+
 
     useEffect(()=>{
         axios.get('http://localhost:8000/api/user/' + profileId)
@@ -31,11 +48,9 @@ const Profile = (props) =>{
 
 
 
-
     return(
         <div>
             <Header id={props.currentId}/>
-
 
             {
                 //Will run if the user is on his/her own page
@@ -100,8 +115,18 @@ const Profile = (props) =>{
                         }
                     </div>   
                 </div>
-
             }
+
+
+            <div>
+
+                {
+                    comments.map((comment, index)=>(
+                        <p>{comment.content}</p>
+                    ))
+                }
+
+            </div>
 
         </div>
     )
