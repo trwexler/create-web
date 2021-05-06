@@ -38,7 +38,16 @@ const UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post",
         }
-    ]
+    ],
+
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment",
+        }
+    ],
+
+
 }, { timestamps: true});
 
 // we want to validate password === confirmPassword, but we don't want this in our DB!
