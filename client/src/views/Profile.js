@@ -134,3 +134,130 @@ const Profile = (props) =>{
 
 
 export default Profile;
+
+
+
+
+
+
+
+
+
+
+// const {profileId} = props;
+// const [userProfile, setUserProfile] = useState({});
+// const [webList, setWebList] = useState([]);
+// const [comments, setComments] = useState([]);
+// const [currentUser, setCurrentUser] = useState({});
+// const [newComments, setNewComments] = useState({});
+
+
+// useEffect(()=>{
+//     axios.get('http://localhost:8000/api/user/' + props.currentId)
+//         .then((res)=>{
+//             console.log(res.data);
+//             setCurrentUser({
+//                 username:res.data.username,
+//                 id:props.currentId,
+//             });
+//             console.log(currentUser);
+//         })
+//         .catch((err)=>{
+//             console.log(err);
+//         })
+// }, [])
+
+
+
+
+
+
+
+// useEffect(()=>{
+//     axios.get('http://localhost:8000/api/comment/' + profileId,
+//     {
+//         withCredentials: true
+//     })
+//         .then((res)=>{
+//             console.log(res.data);
+//             setComments(res.data);
+//         })
+//         .catch((err)=>{
+//             console.log(err);
+//         })
+// },[])
+
+// useEffect(()=>{
+//     axios.get('http://localhost:8000/api/user/' + profileId)
+//         .then((res)=>{
+//             console.log(res.data);
+//             console.log(props.currentId);
+//             setUserProfile(res.data);
+//             console.log(res.data.webs);
+//             setWebList(res.data.webs);
+//         })
+//         .catch((err)=>{
+//             console.log(err);
+//         })
+// }, [])
+
+
+
+
+
+
+// const submitHandler = (e)=>{
+//     e.preventDefault();
+//     axios.post('http://localhost:8000/api/comment', newComments,
+//     {
+//         withCredentials: true
+//     })
+//         .then((res)=>{
+//             console.log(res.data);
+
+//            setNewComments({
+//                content:"",
+//                likes:0,
+//                 posting_user_id: "",
+//                profile_user_id: "",
+//                username: "",
+//            })
+// // //new.. need to check
+
+//             let fullCommentList = [...comments, 
+                
+//                 {content: newComments.content, 
+//                     likes:0, 
+//                     posting_user_id: props.currentId,
+//                     profile_user_id: profileId, 
+//                     username: currentUser.username,
+//                     posting_username: currentUser.username
+//                 }];
+
+//             setComments(fullCommentList); 
+//         })
+//         .catch((err)=>{
+//             console.log(err);
+//         })
+// }
+
+// const handleChange = (e) => {
+//     setNewComments({
+//         ...newComments,
+//         [e.target.name]: e.target.value,
+//     })
+// }
+
+
+
+
+// <form onSubmit={submitHandler}>
+// <label className="m-2">Share your latest with us!</label>
+// <input onChange={handleChange} value={newComments.content} type="text" name="content"/>
+// <br/>
+// <button className="mx-auto my-3 p-3 rounded shadow-md w-24">Post</button>
+// </form>
+
+
+
+
