@@ -26,7 +26,13 @@ posting_user_id: {
 },
 
 username:{
-    type: String
+    type: String,
+    require:[true]
+},
+
+posting_username:{
+    type: String,
+    require:[true]
 }
 
 

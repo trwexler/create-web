@@ -90,8 +90,6 @@ const Feed = (props)=>{
     }
 
 
-
-
     return(
         <div>
             <Header id={props.currentId}/>
@@ -113,13 +111,11 @@ const Feed = (props)=>{
                     <div className="flex">
                         <Link to={`/profile/${aPost.user_id._id}/${user._id}`}><img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/></Link>
 
-{/* Fixed to allow user name to show upon change 
-(aPost.username) and remains in memory upon 
-refresh (aPost.user_id.username).
-Needs better solution. 
-Currently prevents users from viewing 
-the profile of a post that just appeared
-*/}
+    {/* Fixed to allow user name to show upon change 
+    (aPost.username) and remains in memory upon 
+    refresh (aPost.user_id.username).
+    Needs better solution.
+    */}
                 {
 
                 aPost.username ?

@@ -50,7 +50,9 @@ module.exports = {
                 User.findByIdAndUpdate(newComment.profile_user_id, 
                 // this is the data that we want to update
                     {
-                    $push: { comments: newComment._id } 
+                    $push: { comments: newComment._id,
+                    posting_username: newComment._posting_username 
+                    } 
                     }, 
                     {
                     new: true,  // give me the new version...not the original

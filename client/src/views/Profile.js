@@ -110,7 +110,7 @@ const Profile = (props) =>{
 
                         {
                             webList.map((web, index)=>(
-                                <p className="block">{web}</p>
+                                <p key={index}className="block">{web}</p>
                             ))
                         }
                     </div>   
@@ -120,11 +120,12 @@ const Profile = (props) =>{
 
             <div>
 
-                {
+                {/* {
                     comments.map((comment, index)=>(
-                        <p>{comment.content}</p>
+                        <p key={index}>{comment.content}
+                        {comment.posting_username}</p>
                     ))
-                }
+                } */}
 
             </div>
 
@@ -166,9 +167,6 @@ export default Profile;
 //             console.log(err);
 //         })
 // }, [])
-
-
-
 
 
 
@@ -220,7 +218,7 @@ export default Profile;
 //                likes:0,
 //                 posting_user_id: "",
 //                profile_user_id: "",
-//                username: "",
+//                posting_username: ""
 //            })
 // // //new.. need to check
 
