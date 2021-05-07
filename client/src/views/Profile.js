@@ -15,6 +15,29 @@ const Profile = (props) =>{
     const [userProfile, setUserProfile] = useState({});
     const [webList, setWebList] = useState([]);
     const [comments, setComments] = useState([]);
+    const [currentUser, setCurrentUser] = useState({});
+
+
+
+
+
+    useEffect(()=>{
+        axios.get('http://localhost:8000/api/user/' + profileId,
+        {
+            withCredentials: true
+        })
+            .then((res)=>{
+                console.log(profileId);
+                console.log(res.data);
+                setUserProfile(res.data);
+                console.log(res.data.webs);
+                setWebList(res.data.webs);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+    }, [props.currentId, profileId])
+
 
     useEffect(()=>{
         axios.get('http://localhost:8000/api/comment/' + profileId,
@@ -28,22 +51,84 @@ const Profile = (props) =>{
             .catch((err)=>{
                 console.log(err);
             })
-    },[])
-
+    },[props.currentId, profileId])
 
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/user/' + profileId)
-            .then((res)=>{
-                console.log(res.data);
-                setUserProfile(res.data);
-                console.log(res.data.webs);
-                setWebList(res.data.webs);
-            })
-            .catch((err)=>{
-                console.log(err);
-            })
-    }, [])
+    axios.get('http://localhost:8000/api/user/' + props.currentId,{
+        withCredentials: true
+    })
+        .then((res)=>{
+            console.log(res.data);
+            setCurrentUser({
+                username:res.data.username,
+                id:props.currentId,
+            });
+            console.log(currentUser);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+}, [props.currentId, profileId])
+
+
+const [newComments,setNewComments] = useState({
+    content:"",
+    likes:0,
+    posting_user_id: props.currentId,
+    profile_user_id: profileId, 
+    username: currentUser.username,
+    posting_username: currentUser.username
+})
+
+
+const submitHandler = (e)=>{
+    e.preventDefault();
+    axios.post('http://localhost:8000/api/comment', newComments,
+    {
+        withCredentials: true
+    })
+        .then((res)=>{
+            console.log(res.data);
+
+        setNewComments({
+            content:"",
+            likes:0,
+            posting_user_id: props.currentId,
+            profile_user_id: profileId, 
+            username: currentUser.username,
+            posting_username: currentUser.username
+        })
+// //new.. need to check
+
+            let fullCommentList = [...comments, 
+                
+                {content: newComments.content, 
+                    likes:0, 
+                    posting_user_id: props.currentId,
+                    profile_user_id: profileId, 
+                    username: currentUser.username,
+                    posting_username: currentUser.username
+                }];
+
+            setComments(fullCommentList); 
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+}
+
+const handleChange = (e) => {
+    setNewComments({
+        ...newComments,
+        [e.target.name]: e.target.value,
+        posting_username: currentUser.username
+    });
+}
+
+
+
+
 
 
 
@@ -117,16 +202,29 @@ const Profile = (props) =>{
                 </div>
             }
 
+            <form onSubmit={submitHandler}>
+                <label className="m-2">Share your latest with us!</label>
+                <input onChange={handleChange} value={newComments.content} type="text" name="content"/>
+                <br/>
+                <button className="mx-auto my-3 p-3 rounded shadow-md w-24">Post</button>
+            </form>
 
-            <div>
-
-                {/* {
+            <div className="flex flex-col-reverse">
+                {
                     comments.map((comment, index)=>(
-                        <p key={index}>{comment.content}
-                        {comment.posting_username}</p>
-                    ))
-                } */}
+                        <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index}>
 
+                    <Link to={`/profile/${comment.posting_user_id}/${props.currentId}`}><p className="text-gray-500 font-semibold mt-2">
+
+                    {comment.posting_username}
+                    </p></Link>
+
+                    <Link to={`/profile/${comment.posting_user_id}/${props.currentId}`}><p      className="text-gray-500 font-semibold mt-2">
+                    {comment.content}
+                </p></Link>
+                </div>
+                    ))
+                }
             </div>
 
         </div>
@@ -153,98 +251,12 @@ export default Profile;
 // const [newComments, setNewComments] = useState({});
 
 
-// useEffect(()=>{
-//     axios.get('http://localhost:8000/api/user/' + props.currentId)
-//         .then((res)=>{
-//             console.log(res.data);
-//             setCurrentUser({
-//                 username:res.data.username,
-//                 id:props.currentId,
-//             });
-//             console.log(currentUser);
-//         })
-//         .catch((err)=>{
-//             console.log(err);
-//         })
-// }, [])
-
-
-
-
-// useEffect(()=>{
-//     axios.get('http://localhost:8000/api/comment/' + profileId,
-//     {
-//         withCredentials: true
-//     })
-//         .then((res)=>{
-//             console.log(res.data);
-//             setComments(res.data);
-//         })
-//         .catch((err)=>{
-//             console.log(err);
-//         })
-// },[])
-
-// useEffect(()=>{
-//     axios.get('http://localhost:8000/api/user/' + profileId)
-//         .then((res)=>{
-//             console.log(res.data);
-//             console.log(props.currentId);
-//             setUserProfile(res.data);
-//             console.log(res.data.webs);
-//             setWebList(res.data.webs);
-//         })
-//         .catch((err)=>{
-//             console.log(err);
-//         })
-// }, [])
 
 
 
 
 
 
-// const submitHandler = (e)=>{
-//     e.preventDefault();
-//     axios.post('http://localhost:8000/api/comment', newComments,
-//     {
-//         withCredentials: true
-//     })
-//         .then((res)=>{
-//             console.log(res.data);
-
-//            setNewComments({
-//                content:"",
-//                likes:0,
-//                 posting_user_id: "",
-//                profile_user_id: "",
-//                posting_username: ""
-//            })
-// // //new.. need to check
-
-//             let fullCommentList = [...comments, 
-                
-//                 {content: newComments.content, 
-//                     likes:0, 
-//                     posting_user_id: props.currentId,
-//                     profile_user_id: profileId, 
-//                     username: currentUser.username,
-//                     posting_username: currentUser.username
-//                 }];
-
-//             setComments(fullCommentList); 
-//         })
-//         .catch((err)=>{
-//             console.log(err);
-//         })
-// }
-
-// const handleChange = (e) => {
-//     setNewComments({
-//         ...newComments,
-//         [e.target.name]: e.target.value,
-//     })
-// }
 
 
 
