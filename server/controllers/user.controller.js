@@ -32,17 +32,33 @@ module.exports = {
             })
     },
 
+    findMatchingWebUsers: (req, res) => {
+        console.log(req.params.id);
+        console.log(req.params.web);
+        User.find({webs: req.params.web})
+            .then((webUsers) => {
+                console.log("in get findMatchingWebUsers");
+                console.log(webUsers);
+                res.json(webUsers);
+            })
+            .catch((err) => {
+                console.log("error found in findMatchingWebUsers");
+                res.status(400).json(err);
+            })
+    },
+
+
+
     edit: (req, res) => {
         console.log(req.params.id);
-    
         User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,  // give me the new version...not the original
             runValidators: true,  // by default mongoose will NOT validate on updates
         })
             .then((editedMovie) => {
-            console.log("in edit movie");
-            // console.log(updatedMovie);
-            res.json(editedMovie);
+                console.log("in edit movie");
+                // console.log(updatedMovie);
+                res.json(editedMovie);
             })
             .catch((err) => {
             console.log("error found in edit");
@@ -84,7 +100,6 @@ module.exports = {
                                 res.cookie("usertoken", jwt.sign({
                                     _id: userRecord._id,
                                     username: userRecord.username
-
                                 },  process.env.JWT_SECRET ), 
                                     
                                     {httpOnly: true, 
