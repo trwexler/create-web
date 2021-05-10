@@ -5,26 +5,27 @@ import Feed from './views/Feed';
 import Profile from './views/Profile';
 import {Router} from '@reach/router';
 import Edit from './components/Edit';
+import Webs from './views/Webs';
 
 
 function App() {
 
 
   const [currentId, setCurrentId] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
+  
+
 
   return (
     <div className="App">
 
-      
-  
-    
-    
-    
       <Router>
-        <Main default/>
-        <Feed path="/feed/:currentId"/>
+        <Main currentId={currentId} default/>
+        <Feed currentUser={currentUser} setCurrentUser={setCurrentUser}path="/feed/:currentId"/>
         <Profile path = "/profile/:profileId/:currentId"/>
         <Edit path="/edit/:currentId"/>
+        <Webs currentId={currentId} setCurrentId={setCurrentId} path="/webs/:currentId"/>
+        <Webs currentId={currentId} setCurrentId={setCurrentId} path="/webs/:currentId/:web"/>
       </Router>
 
     </div>

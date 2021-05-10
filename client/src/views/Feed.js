@@ -13,7 +13,7 @@ const Feed = (props)=>{
 
 
     const [post, setPost] = useState([]);
-    const [user, setUser] = useState({});
+    const {currentUser, setCurrentUser} = props;
 
     useEffect(()=>{
         axios.get('http://localhost:8000/api/post',
@@ -38,7 +38,7 @@ const Feed = (props)=>{
         })
             .then((res)=>{
                 console.log(res.data);
-                setUser(res.data);
+                setCurrentUser(res.data);
             })
             .catch((err)=>{
                 console.log(err);
@@ -109,7 +109,7 @@ const Feed = (props)=>{
                 <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index+aPost._id}>
 
                     <div className="flex">
-                        <Link to={`/profile/${aPost.user_id._id}/${user._id}`}><img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/></Link>
+                        <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}><img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/></Link>
 
     {/* Fixed to allow user name to show upon change 
     (aPost.username) and remains in memory upon 
@@ -120,12 +120,12 @@ const Feed = (props)=>{
 
                 aPost.username ?
                 
-                <Link to={`/profile/${aPost.user_id}/${user._id}`}>
+                <Link to={`/profile/${aPost.user_id}/${currentUser._id}`}>
                 <p className="text-gray-500 font-semibold mt-2">
                 {aPost.username}
                 </p></Link>
                 
-                :<Link to={`/profile/${aPost.user_id._id}/${user._id}`}>
+                :<Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>
                 <p className="text-gray-500 font-semibold mt-2">
                 {aPost.user_id.username}
                 </p></Link>

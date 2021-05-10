@@ -6,8 +6,7 @@ import {Link, navigate, Router} from '@reach/router';
 // import profilepic from '../components/profilepic.svg';
 // import Upload from '../components/Upload';
 import Edit from '../components/Edit';
-
-
+import Upload from '../components/Upload';
 
 const Profile = (props) =>{
 
@@ -15,11 +14,10 @@ const Profile = (props) =>{
     const [userProfile, setUserProfile] = useState({});
     const [webList, setWebList] = useState([]);
     const [comments, setComments] = useState([]);
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState({
+    });
 
-
-
-
+    
 
     useEffect(()=>{
         axios.get('http://localhost:8000/api/user/' + profileId,
@@ -29,8 +27,18 @@ const Profile = (props) =>{
             .then((res)=>{
                 console.log(profileId);
                 console.log(res.data);
-                setUserProfile(res.data);
+                setUserProfile({
+                    username:res.data.username,
+                    email:res.data.email,
+                    profilePicture:res.data.profilePicture,
+                    bio:res.data.bio,
+                    webs:res.data.webs,
+                    posts:res.data.posts,
+                    comments:res.data.comments
+                });
                 console.log(res.data.webs);
+                console.log("profiles won't update when switching between",
+                userProfile);
                 setWebList(res.data.webs);
             })
             .catch((err)=>{
@@ -62,14 +70,16 @@ const Profile = (props) =>{
             console.log(res.data);
             setCurrentUser({
                 username:res.data.username,
-                id:props.currentId,
+                _id:props.currentId,
+                profilePicture: res.data.profilePicture
             });
+            console.log(props.currentId);
             console.log(currentUser);
         })
         .catch((err)=>{
             console.log(err);
         })
-}, [props.currentId, profileId])
+    }, [props.currentId, profileId])
 
 
 const [newComments,setNewComments] = useState({
@@ -77,7 +87,7 @@ const [newComments,setNewComments] = useState({
     likes:0,
     posting_user_id: props.currentId,
     profile_user_id: profileId, 
-    username: currentUser.username,
+    username: userProfile.username,
     posting_username: currentUser.username
 })
 
@@ -127,12 +137,6 @@ const handleChange = (e) => {
 }
 
 
-
-
-
-
-
-
     return(
         <div>
             <Header id={props.currentId}/>
@@ -141,15 +145,19 @@ const handleChange = (e) => {
                 //Will run if the user is on his/her own page
                 props.profileId == props.currentId
                 ?
+
+
                 <div>
+                <Upload currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
                     <div className="bg-white shadow">
                         <img src="" alt=""/>
-                        <h2 className="text-2xl p-3">Welcome home! {userProfile.username}</h2>
-                        <p className="text-sm">{userProfile.bio}</p>
+                        <h2 className="text-2xl p-3 font-mono">Welcome home, {userProfile.username}!</h2>
+                        <p className="text-sm p-3">{userProfile.bio}</p>
                         <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
-                    <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
-                        <h3 className="text-xl p-3">Your Webs</h3>
+                    <div className="bg-white w-5/6 border mx-auto p-4 my-3 rounded shadow">
+                        <h3 className="text-left text-xl pb-3">Your Webs</h3>
+                        <hr/>
 
                 {/* Runs if user is on his/her own page and hasn't added webs. */}
                         {
@@ -158,18 +166,21 @@ const handleChange = (e) => {
                             <p>Add to your webs!</p>
                             :null
                         }
-                        
+
+                        <div className="flex flex-wrap mt-3">
                         {
                             webList.map((web, index)=>(
-                                <p className="block">{web}</p>
+                                <p onClick={(e)=>navigate(`/webs/${props.currentId}/${web}`)} 
+                                key={index} className="p-3 m-1 rounded-3xl border shadow flex flex-wrap">{web}</p>
                             ))
                         }
+                        </div>
 
                         {/* <p>{userProfile.webs}</p> */}
 
 
 
-                        <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
+                        <button onClick={()=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
                 </div>
                 
@@ -180,7 +191,7 @@ const handleChange = (e) => {
                     <div className="bg-white shadow">
                         <img src="" alt=""/>
                         <h2 className="text-2xl p-3">{userProfile.username}</h2>
-                        <p className="text-sm">{userProfile.bio}</p>
+                        <p className="text-sm p-3">{userProfile.bio}</p>
                     </div>
                     <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
                         <h3 className="text-xl p-3">{userProfile.username}'s webs!</h3>
@@ -195,7 +206,7 @@ const handleChange = (e) => {
 
                         {
                             webList.map((web, index)=>(
-                                <p key={index}className="block">{web}</p>
+                                <p onClick={(e)=>navigate(`/webs/${props.currentId}/${web}`)} key={index} className="block">{web}</p>
                             ))
                         }
                     </div>   
@@ -204,6 +215,7 @@ const handleChange = (e) => {
 
             <form onSubmit={submitHandler}>
                 <label className="m-2">Share your latest with us!</label>
+                <br/>
                 <input onChange={handleChange} value={newComments.content} type="text" name="content"/>
                 <br/>
                 <button className="mx-auto my-3 p-3 rounded shadow-md w-24">Post</button>
@@ -212,16 +224,18 @@ const handleChange = (e) => {
             <div className="flex flex-col-reverse">
                 {
                     comments.map((comment, index)=>(
-                        <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index}>
-
-                    <Link to={`/profile/${comment.posting_user_id}/${props.currentId}`}><p className="text-gray-500 font-semibold mt-2">
+                        <div className="flex flex-col shadow bg-gray-300 p-2 rounded m-2" key={index}>
+                        
+                        
+                    <Link className="inline w-auto" to={`/profile/${comment.posting_user_id}/${props.currentId}`}><p className="inline w-auto text-gray-500 font-semibold mt-2 ">
 
                     {comment.posting_username}
                     </p></Link>
 
-                    <Link to={`/profile/${comment.posting_user_id}/${props.currentId}`}><p      className="text-gray-500 font-semibold mt-2">
-                    {comment.content}
-                </p></Link>
+                    <p className="text-gray-500 font-semibold mt-2">
+                    {comment.content}</p>
+                    <p className="text-gray-500 font-semibold mt-2">
+                    {comment.createdAt}</p>
                 </div>
                     ))
                 }

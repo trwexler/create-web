@@ -12,12 +12,13 @@ const Header = (props)=>{
     return(
         <>
             <nav className="bg-gray-100 ">
-                <ul className="flex justify-between p-5 border ">
+                <ul className="flex justify-between px-4 py-3">
 
-                    <Link to={`/feed/${props.id}`}> <img className="w-10" src={home}  alt=""/></Link>
-                    <li className="hidden lg:flex border">2</li>
-                    <li className="hidden lg:flex border">3</li>
-                    <img className="lg:hidden w-7" src={toggle} alt=""/>
+                    <Link to={`/feed/${props.id}`}> <img className="w-10 mt-2" src={home}  alt=""/></Link>
+                    {/* <li className="hidden lg:flex border">2</li>
+                    <li className="hidden lg:flex border">3</li> */}
+                    <h1 className="text-3xl  p-2">create(Web)</h1>
+                    <img className="lg:hidden w-7 mb-" src={toggle} alt=""/>
                 </ul>
             </nav>
         </>

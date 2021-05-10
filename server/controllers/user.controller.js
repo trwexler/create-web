@@ -1,6 +1,11 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const express = require('express');
+const app = express();
+const fileUpload = require('express-fileupload');
+app.use(express.static('public')); //to access the files in public folder
+app.use(fileUpload());
 
 module.exports = {
     // register new user accounts
@@ -17,6 +22,43 @@ module.exports = {
             })
 
     },
+
+    changePic: (req,res) => {
+
+        if (!req.files) {
+            return res.status(500).send({ msg: "file is not found" })
+        }
+            // accessing the file
+        const myFile = req.files.file;
+        console.log(req.files.file);
+        console.log(`THIS IS 39 ${__dirname}/public/${myFile.name}`);
+
+        //  mv() method places the file inside public directory
+        myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+            if (err) {
+                console.log(err)
+                return res.status(500).send({ msg: "Error occured" });
+            }
+            // returing the response with file path and name
+            return res.send({name: myFile.name, path: `/${myFile.name}`});
+        })
+
+        // User.findByIdAndUpdate(req.params.id, req.files.file, {
+        //     new: true,  // give me the new version...not the original
+        //     runValidators: true, 
+        // })
+        //     .then((newPic) => {
+        //         console.log("in newPic");
+        //         res.json(newPic);
+        //     })
+        //     .catch((err) => {
+        //     console.log("error found in newPic");
+        //     res.status(400).json(err);
+        //     })
+
+    },
+
+
 
     getOne: (req, res) => {
         console.log(req.params.id);

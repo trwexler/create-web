@@ -9,6 +9,15 @@
     }
     input {
         @apply my-2 p-3 rounded shadow bg-gray-50 text-black mx-auto;
+
+    }
+    button{
+        @apply mx-auto my-3 p-3 rounded shadow-md w-24;
+    }
+
+    select{
+        @apply text-center rounded shadow;
+        appearance: none;
     }
 }
 

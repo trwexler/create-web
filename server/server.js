@@ -24,30 +24,29 @@ app.use(cookieParser());
 
 
 app.use(express.static('public')); //to access the files in public folder
-
 app.use(fileUpload());
 
 // file upload api
-app.post('/api/upload', (req, res) => {
+// app.put('/api/upload', (req, res) => {
 
-    if (!req.files) {
-        return res.status(500).send({ msg: "file is not found" })
-    }
-        // accessing the file
-    const myFile = req.files.file;
-    console.log(req.files.file);
-    console.log(`THIS IS 39 ${__dirname}/public/${myFile.name}`);
+//     if (!req.files) {
+//         return res.status(500).send({ msg: "file is not found" })
+//     }
+//         // accessing the file
+//     const myFile = req.files.file;
+//     console.log(req.files.file);
+//     console.log(`THIS IS 39 ${__dirname}/public/${myFile.name}`);
 
-    //  mv() method places the file inside public directory
-    myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
-        if (err) {
-            console.log(err)
-            return res.status(500).send({ msg: "Error occured" });
-        }
-        // returing the response with file path and name
-        return res.send({name: myFile.name, path: `/${myFile.name}`});
-    });
-})
+//     //  mv() method places the file inside public directory
+//     myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+//         if (err) {
+//             console.log(err)
+//             return res.status(500).send({ msg: "Error occured" });
+//         }
+//         // returing the response with file path and name
+//         return res.send({name: myFile.name, path: `/${myFile.name}`});
+//     });
+// })
 
 
 

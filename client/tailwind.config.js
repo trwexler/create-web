@@ -7,11 +7,7 @@ module.exports = {
   theme: {
     fontFamily: {
   
-      'largeText': ['Jura', 'sans-serif'],
-  
-      'display': ['Oswald'],
-  
-      'body': ['Open Sans'],
+      'largeText': ['Jura', 'sans-serif']
     }
   },
   

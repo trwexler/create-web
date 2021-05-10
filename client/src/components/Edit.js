@@ -20,7 +20,9 @@ const Edit = (props)=>{
     ];
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/user/' + props.currentId)
+        axios.get('http://localhost:8000/api/user/' + props.currentId,{
+            withCredentials:true
+        })
             .then((res)=>{
                 console.log(res.data);
                 setEditUser(res.data);

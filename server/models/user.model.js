@@ -21,7 +21,6 @@ const UserSchema = new mongoose.Schema({
 
     profilePicture: {
         type: String,
-        default: "C:/Users/Thomas/Desktop/CodingDojo/create-web/client/src/components/profilepic.svg"
     },
 
     bio: {
