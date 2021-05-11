@@ -33,9 +33,7 @@ const Feed = (props)=>{
     
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/user/' + props.currentId,{
-            withCredentials:true
-        })
+        axios.get('http://localhost:8000/api/user/' + props.currentId)
             .then((res)=>{
                 console.log(res.data);
                 setCurrentUser(res.data);

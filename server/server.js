@@ -62,24 +62,24 @@ require('./routes/comment.routes')(app);
 
 const server = app.listen(port, () => console.log("Successfully connected on port " + port));
 
-const io = socketio(server, {
-  cors: {
-      origin: 'http://localhost:3000',
-      methods: ['GET', 'POST'],
-      allowedHeaders: ['*'],
-      credentials: true,
-  }
-});
+// const io = socketio(server, {
+//   cors: {
+//       origin: 'http://localhost:3000',
+//       methods: ['GET', 'POST'],
+//       allowedHeaders: ['*'],
+//       credentials: true,
+//   }
+// });
 
-// need to start listening for someone to try and connect to our socket
-//    on this server
-io.on("connection", (socket) => {
-  console.log('Server side socket id: ' + socket.id);
+// // need to start listening for someone to try and connect to our socket
+// //    on this server
+// io.on("connection", (socket) => {
+//   console.log('Server side socket id: ' + socket.id);
 
-  socket.on('added_new_movie', (data) => {
-    console.log("added_new_movie");
-    console.log(data);
-    socket.broadcast.emit('added_movie', data);
-  });
+//   socket.on('added_new_movie', (data) => {
+//     console.log("added_new_movie");
+//     console.log(data);
+//     socket.broadcast.emit('added_movie', data);
+//   });
 
-});
+// });
