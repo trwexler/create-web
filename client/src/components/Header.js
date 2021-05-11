@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const Header = (props)=>{
 
+    //Cookie “usertoken” has been rejected because it is already expired.
     const logout = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/user/logout", { 
