@@ -55,7 +55,6 @@ module.exports = {
         //     console.log("error found in newPic");
         //     res.status(400).json(err);
         //     })
-
     },
 
 

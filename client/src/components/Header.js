@@ -2,16 +2,33 @@ import React from 'react';
 import home from './home.svg';
 import toggle from './toggle.svg';
 import {navigate, Link} from '@reach/router';
+import axios from 'axios';
 
 
 
 
 const Header = (props)=>{
 
+    const logout = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:8000/api/user/logout", { 
+        }, {
+        withCredentials: true,
+        })
+        .then((res) => {
+        console.log(res.data);
+        navigate("/");
+        })
+        .catch(err => {
+        console.log(err);
+        });
+    };
+
 
     return(
         <>
             <nav className="bg-gray-100 ">
+                <button onClick={(e) => logout(e) }>Logout</button>
                 <ul className="flex justify-between px-4 py-3">
 
                     <Link to={`/feed/${props.id}`}> <img className="w-10 mt-2" src={home}  alt=""/></Link>
@@ -26,3 +43,5 @@ const Header = (props)=>{
 }
 
 export default Header; 
+
+

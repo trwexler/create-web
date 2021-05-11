@@ -17,7 +17,7 @@ const login = event => {
         withCredentials: true
     })
     .then((res) => {
-        console.log(res.cookie);
+        console.log(res.data.cookie);
         console.log(res);
         console.log(res.data.userLoggedIn._id, 'is res data!');
         navigate(`/feed/${res.data.userLoggedIn._id}`);
