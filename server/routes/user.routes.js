@@ -8,7 +8,7 @@ const { authenticate } = require("../config/jwt.config");
 module.exports = (app) => {
 
 
-  app.put("/api/user/upload/:id", authenticate, userController.changePic);
+  app.put("/api/user/upload/:id", userController.changePic);
 
   app.get("/api", userController.viewAll);
 

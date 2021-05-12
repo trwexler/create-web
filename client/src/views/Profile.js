@@ -13,11 +13,30 @@ const Profile = (props) =>{
     const {profileId, currentUser, setCurrentUser} = props;
     const [userProfile, setUserProfile] = useState({});
     const [webList, setWebList] = useState([]);
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([]);    
+    const [newComments,setNewComments] = useState({
+        content:"",
+        likes:0,
+        posting_user_id: props.currentId,
+        profile_user_id: profileId, 
+        username: "",
+        posting_username: ""
+    });
+
+useEffect(()=>{
+    setNewComments({
+        ...newComments,
+        posting_user_id: currentUser._id,
+        profile_user_id: userProfile._id, 
+        username: userProfile.username,
+        posting_username: currentUser.username,
+
+    })
+},[userProfile, currentUser])
 
 
-    
 
+    //Getting profile User:
     useEffect(()=>{
         axios.get('http://localhost:8000/api/user/' + profileId,
         {
@@ -26,69 +45,51 @@ const Profile = (props) =>{
             .then((res)=>{
                 console.log(profileId);
                 console.log(res.data);
-                setUserProfile({
-                    username:res.data.username,
-                    email:res.data.email,
-                    profilePicture:res.data.profilePicture,
-                    bio:res.data.bio,
-                    webs:res.data.webs,
-                    posts:res.data.posts,
-                    comments:res.data.comments
-                });
+                setUserProfile(res.data);
                 console.log(res.data.webs);
                 console.log("profiles won't update when switching between",
                 userProfile);
                 setWebList(res.data.webs);
+                setComments(res.data.comments);
             })
             .catch((err)=>{
                 console.log(err);
             })
-    }, [props.currentId, profileId])
+    }, [profileId])
 
 
-    useEffect(()=>{
-        axios.get('http://localhost:8000/api/comment/' + profileId,
-        {
-            withCredentials: true
-        })
-            .then((res)=>{
-                console.log(res.data);
-                setComments(res.data);
-            })
-            .catch((err)=>{
-                console.log(err);
-            })
-    },[props.currentId, profileId])
+    //Getting profile User's comments:
+    // useEffect(()=>{
+    //     axios.get('http://localhost:8000/api/comment/' + profileId,
+    //     {
+    //         withCredentials: true
+    //     })
+    //         .then((res)=>{
+    //             console.log(res.data);
+    //             setComments(res.data);
+    //         })
+    //         .catch((err)=>{
+    //             console.log(err);
+    //         })
+    // },[profileId])
 
 
+    // Getting the logged in user:
     useEffect(()=>{
     axios.get('http://localhost:8000/api/user/' + props.currentId,{
         withCredentials: true
     })
         .then((res)=>{
             console.log(res.data);
-            setCurrentUser({
-                username:res.data.username,
-                _id:props.currentId,
-                profilePicture: res.data.profilePicture
-            });
+            setCurrentUser(res.data);
             console.log(props.currentId);
-            console.log(currentUser);
+            console.log("logging currentUser...not quick enough",currentUser);
         })
         .catch((err)=>{
             console.log(err);
         })
-    }, [props.currentId, profileId])
+    }, [props.currentId])
 
-
-const [newComments,setNewComments] = useState({
-    content:"",
-    likes:0,
-    posting_user_id: props.currentId,
-    profile_user_id: profileId, 
-    username: userProfile.username,
-    posting_username: currentUser.username
-})
 
 
 const submitHandler = (e)=>{
@@ -100,41 +101,44 @@ const submitHandler = (e)=>{
         .then((res)=>{
             console.log(res.data);
 
-        setNewComments({
-            content:"",
-            likes:0,
-            posting_user_id: props.currentId,
-            profile_user_id: profileId, 
-            username: currentUser.username,
-            posting_username: currentUser.username
-        })
+        // setNewComments({
+        //     content:"",
+        //     likes:0,
+        //     posting_user_id: props.currentId,
+        //     profile_user_id: profileId, 
+        //     username: currentUser.username,
+        //     posting_username: currentUser.username
+        // })
+
+            setNewComments({
+                ...newComments,
+                content: ""
+            })
 // //new.. need to check
+            // let fullCommentList = [...comments, 
+            //     res.data
+            //     // {content: newComments.content, 
+            //     //     likes:0, 
+            //     //     posting_user_id: props.currentId,
+            //     //     profile_user_id: profileId, 
+            //     //     username: currentUser.username,
+            //     //     posting_username: currentUser.username
+            //     // }
+            // ];
 
-            let fullCommentList = [...comments, 
-                
-                {content: newComments.content, 
-                    likes:0, 
-                    posting_user_id: props.currentId,
-                    profile_user_id: profileId, 
-                    username: currentUser.username,
-                    posting_username: currentUser.username
-                }];
-
-            setComments(fullCommentList); 
+            setComments(res.data.comments);
         })
         .catch((err)=>{
             console.log(err);
         })
 }
-
 const handleChange = (e) => {
     setNewComments({
         ...newComments,
         [e.target.name]: e.target.value,
-        posting_username: currentUser.username
+        // posting_username: currentUser.username
     });
 }
-
 
     return(
         <div>
@@ -144,8 +148,6 @@ const handleChange = (e) => {
                 //Will run if the user is on his/her own page
                 props.profileId == props.currentId
                 ?
-
-
                 <div>
                 <Upload currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
                     <div className="bg-white shadow">

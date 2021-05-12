@@ -33,15 +33,38 @@ module.exports = {
         console.log(req.files.file);
         console.log(`THIS IS 39 ${__dirname}/public/${myFile.name}`);
 
+        User.findByIdAndUpdate(req.params.id, req.files.file, {
+            new: true,  // give me the new version...not the original
+            runValidators: true, 
+            useFindAndModify: false
+            })
+                .then((picUpdated) => {
+                    console.log("in newPic");
+
+                    myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+                        if (err) {
+                            console.log(err)
+                            return res.status(500).send({ msg: "Error occured" });
+                        }
+                        // returing the response with file path and name
+                        // res.send({name: myFile.name, path: `/${myFile.name}`});
+                        res.json(picUpdated);
+                    })
+                })
+                .catch((err) => {
+                    console.log("error found in newPic");
+                    res.status(400).json(err);
+                })
+
         //  mv() method places the file inside public directory
-        myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
-            if (err) {
-                console.log(err)
-                return res.status(500).send({ msg: "Error occured" });
-            }
-            // returing the response with file path and name
-            return res.send({name: myFile.name, path: `/${myFile.name}`});
-        })
+        // myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+        //     if (err) {
+        //         console.log(err)
+        //         return res.status(500).send({ msg: "Error occured" });
+        //     }
+        //     // returing the response with file path and name
+        //     return res.send({name: myFile.name, path: `/${myFile.name}`});
+        // })
 
         // User.findByIdAndUpdate(req.params.id, req.files.file, {
         //     new: true,  // give me the new version...not the original
@@ -62,9 +85,11 @@ module.exports = {
     getOne: (req, res) => {
         console.log(req.params.id);
         User.findById(req.params.id)
+        //eliminates that part after -
+            .populate("comments", "-__v")
             .then((oneUser) => {
             console.log("in get one user");
-            // console.log(oneMovie);
+
             res.json(oneUser);
             })
             .catch((err) => {
@@ -72,6 +97,7 @@ module.exports = {
             res.status(400).json(err);
             })
     },
+
 
     findMatchingWebUsers: (req, res) => {
         console.log(req.params.id);
@@ -95,6 +121,7 @@ module.exports = {
         User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,  // give me the new version...not the original
             runValidators: true,  // by default mongoose will NOT validate on updates
+            useFindAndModify: false
         })
             .then((editedMovie) => {
                 console.log("in edit movie");

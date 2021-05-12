@@ -6,21 +6,21 @@ const Upload = (props)=> {
     const [file, setFile] = useState('');   
     // storing the recived file from backend
     const [data, getData] = useState({ name: "", path: "" });    
-    const [progress, setProgess] = useState(0); // progess bar
     const fileInput = useRef(); // accesing input element
     const {setCurrentUser, currentUser, currentId } = props;
-    
+        // const [progress, setProgess] = useState(0); // progess bar
 
 
     const handleInputChange = (e) => {
-        setProgess(0)
+        // setProgess(0)
         const file = e.target.files[0]; // accessing file
         console.log(file);
         setFile(file); // storing file
         setCurrentUser({
+            username: currentUser.username,
+            _id:currentUser._id,
             profilePicture: file
         });
-
     }
 
     const uploadFile = () => {
@@ -38,16 +38,20 @@ const Upload = (props)=> {
         // }
         
         ).then(res => {
-            console.log(res);
+            console.log(res.data);
+            
             getData({ name: res.data.name,
                 path: 'http://localhost:8000/' + res.data.path
             })
             setCurrentUser({
-                profilePicture:'http://localhost:8000/' + res.data.path
+                username: currentUser.username,
+                _id:currentUser._id,
+                profilePicture:'http://localhost:8000/' + res.data.path,
             })
             console.log(res.data.path);
             console.log(currentUser);
-        }).catch(err => console.log(err))}
+        })
+        .catch(err => console.log(err))}
 
     return (
         <div>
