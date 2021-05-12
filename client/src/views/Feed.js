@@ -5,6 +5,7 @@ import {Link, navigate, Router} from '@reach/router';
 import like from '../components/like.svg';
 import profilepic from '../components/profilepic.svg';
 import Upload from '../components/Upload';
+import LikeButton from '../components/LikeButton';
 
 
 
@@ -13,6 +14,7 @@ const Feed = (props)=>{
 
 
     const [post, setPost] = useState([]);
+    const [postId, setPostId] = useState("");
     const {currentUser, setCurrentUser} = props;
 
     useEffect(()=>{
@@ -87,11 +89,10 @@ const Feed = (props)=>{
         })
     }
 
-
     return(
         <div>
             <Header id={props.currentId}/>
-            {/* will have to map through messages. This is format though: */}
+
 
             <form onSubmit={submitHandler}>
                 <label className="m-2">Share your latest with us!</label>
@@ -134,7 +135,12 @@ const Feed = (props)=>{
                     <p className="text-sm text-left text-white p-2">{aPost.content}</p>
 
                     <div className="flex justify-center">
-                        <p className=" m-1">Like</p>
+                    <LikeButton likes={aPost.likes} post={post} setPost={setPost}  postId={aPost._id} />
+                        <p name="likes" value={aPost.likes} 
+                        >{aPost.likes}</p>
+                        <p className="m-1"
+                        
+                        >Like</p>
                         <img className="w-4 m-1" src={like} alt="UPVOTE"/>
                     </div>
                 </div> 

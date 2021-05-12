@@ -4,6 +4,7 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+    
     viewAll: (req, res) => {
         Post.find({})
             // .sort({ postDate : "descending" })
@@ -17,6 +18,40 @@ module.exports = {
             .catch((err) => {
                 console.log("error found in getAll");
                 res.status(400).json(err);
+            })
+    },
+
+    getOne: (req, res) => {
+        console.log(req.params.id);
+        Post.findById(req.params.id)
+            .then((onePost) => {
+            console.log("in get one post");
+            // console.log(oneMovie);
+            console.log(res);
+            res.json(onePost);
+            })
+            .catch((err) => {
+            console.log("error found in getOne post");
+            res.status(400).json(err);
+            })
+    },
+
+    edit: (req, res) => {
+        console.log(req.params.id);
+        Post.findByIdAndUpdate(req.params.id, {
+            $inc: {likes : 1}
+        }, {
+            new: true,  // give me the new version...not the original
+            runValidators: true,  // by default mongoose will NOT validate on updates,
+            useFindAndModify: false,
+        })
+            .then((editedPost) => {
+                console.log("in edit post");
+                res.json(editedPost);
+            })
+            .catch((err) => {
+            console.log("error found in edit post");
+            res.status(400).json(err);
             })
     },
 

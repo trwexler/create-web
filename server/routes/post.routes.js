@@ -4,6 +4,13 @@ const postController = require("../controllers/post.controller");
 const { authenticate } = require("../config/jwt.config");
 
 module.exports = (app) => {
-    app.get("/api/post", authenticate, postController.viewAll);
+    app.get("/api/post", postController.viewAll);
+    
+    app.get("/api/post/:id", postController.getOne);
+
+    app.put("/api/put/:id", postController.edit);
+
     app.post("/api/post", authenticate, postController.create);
+
+    
 };
