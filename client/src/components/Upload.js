@@ -9,6 +9,7 @@ const Upload = (props)=> {
     const [progress, setProgess] = useState(0); // progess bar
     const fileInput = useRef(); // accesing input element
     const {setCurrentUser, currentUser, currentId } = props;
+    
 
 
     const handleInputChange = (e) => {

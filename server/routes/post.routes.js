@@ -8,7 +8,7 @@ module.exports = (app) => {
     
     app.get("/api/post/:id", postController.getOne);
 
-    app.put("/api/put/:id", postController.edit);
+    app.put("/api/edit/:id", postController.edit);
 
     app.post("/api/post", authenticate, postController.create);
 

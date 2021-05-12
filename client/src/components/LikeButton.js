@@ -16,10 +16,15 @@ const LikeButton = (props)=>{
 
 
     const likeHandler = (e)=>{
-        axios.put('http://localhost:8000/api/post/' + postId, post)
+        axios.put('http://localhost:8000/api/edit/' + postId, post)
             .then((res)=>{
                 console.log(res.data);
-                const postConstant = [...post, res.data];
+                const postConstant = [...post, {
+                    content:res.data,
+                    likes:res.data++,
+                    user_id:res.data,
+                    username:res.data
+                }];
                 setPost(postConstant);
                 console.log(post); 
             })
