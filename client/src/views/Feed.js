@@ -89,6 +89,7 @@ const Feed = (props)=>{
         })
     }
 
+
     return(
         <div>
             <Header id={props.currentId}/>
@@ -134,19 +135,10 @@ const Feed = (props)=>{
 
                     <p className="text-sm text-left text-white p-2">{aPost.content}</p>
 
-                    <div className="flex justify-center">
 
+                    <LikeButton likes={aPost.likes} post={post} aPost={aPost} setPost={setPost}  postId={aPost._id}/>
 
-                    <LikeButton likes={aPost.likes} post={aPost} setPost={setPost}  postId={aPost._id} />
-
-
-                        <p name="likes" value={aPost.likes} 
-                        >{aPost.likes}</p>
-                        <p className="m-1"
-                        
-                        >Like</p>
-                        <img className="w-4 m-1" src={like} alt="UPVOTE"/>
-                    </div>
+                    
                 </div> 
             ))}
             </div>

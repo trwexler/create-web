@@ -22,7 +22,7 @@ function App() {
       <Router>
         <Main currentId={currentId} default/>
         <Feed currentUser={currentUser} setCurrentUser={setCurrentUser}path="/feed/:currentId"/>
-        <Profile path = "/profile/:profileId/:currentId"/>
+        <Profile currentUser={currentUser} setCurrentUser={setCurrentUser} path = "/profile/:profileId/:currentId"/>
         <Edit path="/edit/:currentId"/>
         <Webs currentId={currentId} setCurrentId={setCurrentId} path="/webs/:currentId"/>
         <Webs currentId={currentId} setCurrentId={setCurrentId} path="/webs/:currentId/:web"/>

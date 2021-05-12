@@ -10,12 +10,11 @@ import Upload from '../components/Upload';
 
 const Profile = (props) =>{
 
-    const {profileId} = props;
+    const {profileId, currentUser, setCurrentUser} = props;
     const [userProfile, setUserProfile] = useState({});
     const [webList, setWebList] = useState([]);
     const [comments, setComments] = useState([]);
-    const [currentUser, setCurrentUser] = useState({
-    });
+
 
     
 
