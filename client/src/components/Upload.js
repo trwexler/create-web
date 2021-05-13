@@ -1,12 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
+import check from './check.svg';
 
 const Upload = (props)=> {
     // storing the uploaded file 
     const [file, setFile] = useState('');   
     // storing the recived file from backend
     const [data, getData] = useState({ name: "", path: "" });    
-    const fileInput = useRef(); // accesing input element
+    const profilePicture = useRef(); // accesing input element
     const {setCurrentUser, currentUser, currentId } = props;
     const [changePic, setChangePic] = useState({
         ...currentUser,
@@ -19,10 +20,11 @@ const Upload = (props)=> {
         const file = e.target.files[0]; // accessing file
         console.log(file);
         setFile(file); // storing file
-        console.log(e.target.name, e.target.value);
+        console.log(e.target.name, e.target.files[0]);
         setChangePic({
             ...currentUser,
-            [e.target.name]:e.target.value,
+            // [e.target.name]:e.target.files[0],
+            [e.target.name]:e.target.files[0].name,
         });
     }
 
@@ -40,40 +42,68 @@ const Upload = (props)=> {
                 path: 'http://localhost:8000/' + res.data.path
             })
 
-            setChangePic({
-                ...currentUser,
-                profilePicture: 'http://localhost:8000/' + res.data.path
-            })
-            setCurrentUser({
-                ...currentUser,
-                profilePicture: 'http://localhost:8000/' + res.data.path
-            })
+            // setChangePic({
+            //     ...currentUser,
+            //     profilePicture: 'http://localhost:8000/' + res.data.path
+            // })
+            // setCurrentUser({
+            //     ...currentUser,
+            //     profilePicture: 'http://localhost:8000/' + res.data.path
+            // })
             console.log(res.data.path);
             console.log(currentUser);
         })
         .catch(err => console.log(err))}
 
-    return (
-        <div>
 
-            
+return (
 
-            <div className="file-upload">
+<div>
 
-                <input ref={fileInput} type="file" name="profilePicture"  onChange={handleInputChange} />   
+    {/* <div className="file-upload">
 
-                {/* <div className="progessBar" style={{ width: progress }}>
-                {progress}
-                </div> */}
-                <button onClick={uploadFile}>                   
-                Upload
-                </button>
-            <hr />
-            {/* displaying received image
-            {data.path && <img src={data.path} alt={data.name} />} */}
-            </div>
-        </div>
-    );
-}
+        <input ref={profilePicture} type="file" name="profilePicture"  onChange={handleInputChange} />   
+
+        {/* <div className="progessBar" style={{ width: progress }}>
+        {progress}
+        </div> */}
+        {/* <button onClick={uploadFile}>                   
+        Upload
+        </button>
+    <hr />
+    </div> */} 
+
+    <div className="flex items-center justify-center bg-grey-lighter">
+
+    <label className="w-22 flex flex-col items-center 
+    px-4 pt-6 bg-white text-blue rounded-lg shadow-lg 
+    tracking-wide uppercase border border-blue cursor-pointer 
+    hover:bg-blue-200 hover:text-white">
+
+        <svg className="w-8 h-8" fill="currentColor" 
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 20 20">
+            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 
+            1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 
+            17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+        </svg>
+
+        <span className="mt-2 text-base leading-normal">Update Picture</span>
+
+        <input className="hidden"
+        ref={profilePicture} type="file" name="profilePicture"  
+        onChange={handleInputChange} />
+
+    </label>
+
+    <img onClick={uploadFile} className="w-6 mt-5 z-50" src={check} alt="" />
+
+    </div>
+
+
+
+</div>
+
+)}
 
 export default Upload;

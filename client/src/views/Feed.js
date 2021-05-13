@@ -103,7 +103,9 @@ const Feed = (props)=>{
             </form>
 
             <div className="flex flex-col-reverse">
+            
             {
+
             post.map((aPost, index)=>(
                 
                 <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index+aPost._id}>

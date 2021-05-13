@@ -19,7 +19,6 @@ profile_user_id: {
 },
 
 
-
 posting_user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
