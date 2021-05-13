@@ -20,21 +20,36 @@ module.exports = {
                 console.log("error in ViewAll");
                 res.status(400).json(err);
             })
+    },
 
+    getImg: (req, res) => {
+        User.findById(req.params.id)
+        //eliminates that part after -
+            // .populate("comments", "-__v")
+            .then((getImg) => {
+            console.log("in get getImg");
+
+            res.json(getImg);
+            })
+            .catch((err) => {
+            console.log("error found in getImg");
+            res.status(400).json(err);
+            })
     },
 
     changePic: (req,res) => {
-
         if (!req.files) {
             return res.status(500).send({ msg: "file is not found" })
         }
             // accessing the file
+        const profilePicture = req.files.file;
         const myFile = req.files.file;
         console.log(req.files.file);
+        console.log("34-myFile", myFile);
         console.log(`THIS IS 39 ${__dirname}/public/${myFile.name}`);
         
 
-        User.findByIdAndUpdate(req.params.id, {profilePicture: myFile.name}
+        User.findByIdAndUpdate(req.params.id, {profilePicture: profilePicture.name}
         , {
             new: true,  // give me the new version...not the original
             runValidators: true, 
@@ -44,9 +59,7 @@ module.exports = {
                     console.log(picUpdated);
                     console.log("45 my file", myFile);
                     console.log(`${__dirname}`);
-
-                    myFile.mv(`${__dirname}/public/${myFile.name}`, function
-                    
+                    profilePicture.mv("./public/" + profilePicture.name, function
                     (err) {
                         if (err) {
                             console.log(err)
@@ -55,7 +68,15 @@ module.exports = {
                         // returing the response with file path and name
                         // res.send({name: myFile.name, path: `/${myFile.name}`});
                         else{
-                            res.json(picUpdated);
+                            res.send({
+                                status: true,
+                                message: 'File is uploaded',
+                                data: {
+                                    name: profilePicture.name,
+                                    mimetype: profilePicture.mimetype,
+                                    size: profilePicture.size
+                                }
+                            });
                         }
                     })
                 })

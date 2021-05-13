@@ -5,6 +5,13 @@ const cors = require('cors');
 const socketio = require('socket.io');
 const fileUpload = require('express-fileupload');
 const cookieParser = require("cookie-parser");
+const morgan = require('morgan');
+const _ = require('lodash');
+app.use(express.static('public')); //to access the files in public folder
+
+app.use(fileUpload({
+  createParentPath: true
+}));
 
 const port = process.env.MY_PORT;
 
@@ -18,13 +25,13 @@ app.use(cors({
 }));
 
 app.use(cookieParser());
+app.use(morgan('dev'));
 
 
 
 
 
-app.use(express.static('public')); //to access the files in public folder
-app.use(fileUpload());
+
 
 // file upload api
 // app.put('/api/upload', (req, res) => {

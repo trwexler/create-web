@@ -12,6 +12,8 @@ module.exports = (app) => {
 
   app.get("/api", userController.viewAll);
 
+  // app.get("/api/image/:id/:profilePicture", userController.getImg);
+
   app.get("/api/user/:id", userController.getOne);
   
   app.get("/api/user/web/:web", userController.findMatchingWebUsers);//search for users who have web
