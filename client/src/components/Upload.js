@@ -8,7 +8,10 @@ const Upload = (props)=> {
     const [data, getData] = useState({ name: "", path: "" });    
     const fileInput = useRef(); // accesing input element
     const {setCurrentUser, currentUser, currentId } = props;
-        // const [progress, setProgess] = useState(0); // progess bar
+    const [changePic, setChangePic] = useState({
+        ...currentUser,
+        profilePicture:""
+    })
 
 
     const handleInputChange = (e) => {
@@ -16,26 +19,19 @@ const Upload = (props)=> {
         const file = e.target.files[0]; // accessing file
         console.log(file);
         setFile(file); // storing file
-        setCurrentUser({
-            username: currentUser.username,
-            _id:currentUser._id,
-            profilePicture: file
+        console.log(e.target.name, e.target.value);
+        setChangePic({
+            ...currentUser,
+            [e.target.name]:e.target.value,
         });
     }
 
     const uploadFile = () => {
         const formData = new FormData();        
         formData.append('file', file); // appending file
-        axios.put('http://localhost:8000/api/user/upload/' + currentId, formData,{
+        axios.put('http://localhost:8000/api/user/upload/' + currentId, formData, {
             withCredentials:true
         }
-        // ,{
-        //     onUploadProgress: (ProgressEvent) => {
-        //         let progress = Math.round(
-        //         ProgressEvent.loaded / ProgressEvent.total * 100) + '%';
-        //         setProgess(progress);
-        //     }
-        // }
         
         ).then(res => {
             console.log(res.data);
@@ -43,10 +39,14 @@ const Upload = (props)=> {
             getData({ name: res.data.name,
                 path: 'http://localhost:8000/' + res.data.path
             })
+
+            setChangePic({
+                ...currentUser,
+                profilePicture: 'http://localhost:8000/' + res.data.path
+            })
             setCurrentUser({
-                username: currentUser.username,
-                _id:currentUser._id,
-                profilePicture:'http://localhost:8000/' + res.data.path,
+                ...currentUser,
+                profilePicture: 'http://localhost:8000/' + res.data.path
             })
             console.log(res.data.path);
             console.log(currentUser);
@@ -55,9 +55,12 @@ const Upload = (props)=> {
 
     return (
         <div>
+
+            
+
             <div className="file-upload">
 
-                <input ref={fileInput} type="file" name="fileInput"  onChange={handleInputChange} />   
+                <input ref={fileInput} type="file" name="profilePicture"  onChange={handleInputChange} />   
 
                 {/* <div className="progessBar" style={{ width: progress }}>
                 {progress}

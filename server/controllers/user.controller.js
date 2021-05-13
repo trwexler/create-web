@@ -32,23 +32,31 @@ module.exports = {
         const myFile = req.files.file;
         console.log(req.files.file);
         console.log(`THIS IS 39 ${__dirname}/public/${myFile.name}`);
+        
 
-        User.findByIdAndUpdate(req.params.id, req.files.file, {
+        User.findByIdAndUpdate(req.params.id, {profilePicture: myFile.name}
+        , {
             new: true,  // give me the new version...not the original
             runValidators: true, 
             useFindAndModify: false
             })
                 .then((picUpdated) => {
-                    console.log("in newPic");
+                    console.log(picUpdated);
+                    console.log("45 my file", myFile);
+                    console.log(`${__dirname}`);
 
-                    myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+                    myFile.mv(`${__dirname}/public/${myFile.name}`, function
+                    
+                    (err) {
                         if (err) {
                             console.log(err)
                             return res.status(500).send({ msg: "Error occured" });
                         }
                         // returing the response with file path and name
                         // res.send({name: myFile.name, path: `/${myFile.name}`});
-                        res.json(picUpdated);
+                        else{
+                            res.json(picUpdated);
+                        }
                     })
                 })
                 .catch((err) => {
