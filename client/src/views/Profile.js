@@ -8,6 +8,7 @@ import {Link, navigate, Router} from '@reach/router';
 import Edit from '../components/Edit';
 import Upload from '../components/Upload';
 
+
 const Profile = (props) =>{
 
     const {profileId, currentUser, setCurrentUser} = props;
@@ -75,20 +76,20 @@ useEffect(()=>{
 
 
     // Getting the logged in user:
-    useEffect(()=>{
-    axios.get('http://localhost:8000/api/user/' + props.currentId,{
-        withCredentials: true
+useEffect(()=>{
+axios.get('http://localhost:8000/api/user/' + props.currentId,{
+    withCredentials: true
+})
+    .then((res)=>{
+        console.log(res.data);
+        setCurrentUser(res.data);
+        console.log(props.currentId);
+        console.log("logging currentUser...not quick enough",currentUser);
     })
-        .then((res)=>{
-            console.log(res.data);
-            setCurrentUser(res.data);
-            console.log(props.currentId);
-            console.log("logging currentUser...not quick enough",currentUser);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-    }, [props.currentId])
+    .catch((err)=>{
+        console.log(err);
+    })
+}, [props.currentId])
 
 
 
@@ -132,6 +133,7 @@ const submitHandler = (e)=>{
             console.log(err);
         })
 }
+
 const handleChange = (e) => {
     setNewComments({
         ...newComments,
@@ -142,13 +144,17 @@ const handleChange = (e) => {
 
     return(
         <div>
+        {/* <img src={profPics}  alt="" /> */}
             <Header id={props.currentId}/>
-
             {
                 //Will run if the user is on his/her own page
                 props.profileId == props.currentId
                 ?
                 <div>
+                <img className="w-24 mx-auto"
+                src={`http://localhost:8000/${currentUser.profilePicture}`} alt="" />
+
+
                 <Upload currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
                     <div className="bg-white shadow">
                         <img src="" alt=""/>
@@ -178,9 +184,6 @@ const handleChange = (e) => {
                         </div>
 
                         {/* <p>{userProfile.webs}</p> */}
-
-
-
                         <button onClick={()=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
                 </div>
@@ -190,7 +193,7 @@ const handleChange = (e) => {
                 
                 <div>
                     <div className="bg-white shadow">
-                        <img src="" alt=""/>
+                    <img src={`http://localhost:8000/${userProfile.profilePicture}`} alt="" />
                         <h2 className="text-2xl p-3">{userProfile.username}</h2>
                         <p className="text-sm p-3">{userProfile.bio}</p>
                     </div>
