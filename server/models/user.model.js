@@ -46,6 +46,15 @@ const UserSchema = new mongoose.Schema({
         }
     ],
 
+    documents: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Document",
+        }
+    ],
+
+
+
 
 }, { timestamps: true});
 

@@ -7,6 +7,7 @@ import {Link, navigate, Router} from '@reach/router';
 // import Upload from '../components/Upload';
 import Edit from '../components/Edit';
 import Upload from '../components/Upload';
+// import TeamEditor from '../components/TeamEditor';
 
 
 const Profile = (props) =>{
@@ -73,9 +74,9 @@ useEffect(()=>{
     //             console.log(err);
     //         })
     // },[profileId])
-
-
     // Getting the logged in user:
+
+    
 useEffect(()=>{
 axios.get('http://localhost:8000/api/user/' + props.currentId,{
     withCredentials: true
@@ -172,9 +173,20 @@ const handleChange = (e) => {
                         <p className="text-sm p-3">{userProfile.bio}</p>
                         <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
+
+
                     <div className="bg-white w-5/6 border mx-auto p-4 my-3 rounded shadow">
                         <h3 className="text-left text-xl pb-3">Your Webs</h3>
                         <hr/>
+
+
+
+                    <Link to={`/teameditor/${currentUser._id}`}><span>
+                        Get to writing!
+                    </span></Link>
+
+
+
 
                 {/* Runs if user is on his/her own page and hasn't added webs. */}
                         {
@@ -196,6 +208,8 @@ const handleChange = (e) => {
                         {/* <p>{userProfile.webs}</p> */}
                         <button onClick={()=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
+
+
                 </div>
                 
                 //Runs if user is NOT on their page

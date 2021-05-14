@@ -78,6 +78,7 @@ require('./config/mongoose.config');
 require('./routes/user.routes')(app);
 require('./routes/post.routes')(app);
 require('./routes/comment.routes')(app);
+require('./routes/document.routes')(app);
 // require('./routes/file.routes')(app);
 
 
