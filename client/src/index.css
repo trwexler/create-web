@@ -9,6 +9,7 @@
     }
     input {
         @apply my-2 p-3 rounded shadow bg-gray-50 text-black mx-auto;
+        appearance: none;
 
     }
     button{

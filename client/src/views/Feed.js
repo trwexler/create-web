@@ -111,7 +111,11 @@ const Feed = (props)=>{
                 <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index+aPost._id}>
 
                     <div className="flex">
-                        <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}><img src={profilepic} className="w-10 m-1 border" alt="ProfilePic"/></Link>
+                        <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>    <img className="w-16  mx-auto my-2 rounded-3xl"
+    src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/></Link>
+
+    {/* <img className="w-10 h-36 mx-auto my-2 rounded-3xl"
+    src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/> */}
 
     {/* Fixed to allow user name to show upon change 
     (aPost.username) and remains in memory upon 

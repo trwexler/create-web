@@ -151,13 +151,23 @@ const handleChange = (e) => {
                 props.profileId == props.currentId
                 ?
                 <div>
-                <img className="w-24 mx-auto"
-                src={`http://localhost:8000/${currentUser.profilePicture}`} alt="" />
+
+                    <div className="rounded h-full w-1/2 mx-auto py-1 mx-2 m-2 bg-white">
+
+                        {/* <img className="w-54 h-36 mx-auto my-2 rounded-3xl"
+                        src={`http://localhost:8000/${currentUser.profilePicture}`} alt="" /> */}
+
+                        <Upload userProfile={userProfile} currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
 
 
-                <Upload currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+                    </div>
+
+
+                {/* <img className="w-24 mx-auto"
+                src={`http://localhost:8000/${currentUser.profilePicture}`} alt="" /> */}
+                {/* <Upload currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/> */}
+
                     <div className="bg-white shadow">
-                        <img src="" alt=""/>
                         <h2 className="text-2xl p-3 font-mono">Welcome home, {userProfile.username}!</h2>
                         <p className="text-sm p-3">{userProfile.bio}</p>
                         <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
@@ -190,13 +200,19 @@ const handleChange = (e) => {
                 
                 //Runs if user is NOT on their page
                 :
-                
                 <div>
+
                     <div className="bg-white shadow">
-                    <img src={`http://localhost:8000/${userProfile.profilePicture}`} alt="" />
+
+                        <img className="w-54 h-36 mx-auto my-2 rounded-full"
+                        src={`http://localhost:8000/${userProfile.profilePicture}`} alt=""/>
+
                         <h2 className="text-2xl p-3">{userProfile.username}</h2>
+
                         <p className="text-sm p-3">{userProfile.bio}</p>
+
                     </div>
+
                     <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
                         <h3 className="text-xl p-3">{userProfile.username}'s webs!</h3>
                 {/* Runs if user is not on their page
