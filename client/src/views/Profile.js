@@ -76,7 +76,7 @@ useEffect(()=>{
     // },[profileId])
     // Getting the logged in user:
 
-    
+
 useEffect(()=>{
 axios.get('http://localhost:8000/api/user/' + props.currentId,{
     withCredentials: true
@@ -170,20 +170,23 @@ const handleChange = (e) => {
 
                     <div className="bg-white shadow">
                         <h2 className="text-2xl p-3 font-mono">Welcome home, {userProfile.username}!</h2>
+                        
+                    <Link to={`/teameditor/${currentUser._id}`}><button>
+                        Get to writing!
+                    </button></Link>
+                    <Link profileId={profileId} to={`/alldocs/${profileId}`}><button>
+                        View All Writings!
+                    </button></Link>
                         <p className="text-sm p-3">{userProfile.bio}</p>
                         <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
+
 
 
                     <div className="bg-white w-5/6 border mx-auto p-4 my-3 rounded shadow">
                         <h3 className="text-left text-xl pb-3">Your Webs</h3>
                         <hr/>
 
-
-
-                    <Link to={`/teameditor/${currentUser._id}`}><span>
-                        Get to writing!
-                    </span></Link>
 
 
 
@@ -222,6 +225,9 @@ const handleChange = (e) => {
                         src={`http://localhost:8000/${userProfile.profilePicture}`} alt=""/>
 
                         <h2 className="text-2xl p-3">{userProfile.username}</h2>
+                        <Link to={`/alldocs/${userProfile._id}`}><button>
+                        View All Writings!
+                    </button></Link>
 
                         <p className="text-sm p-3">{userProfile.bio}</p>
 

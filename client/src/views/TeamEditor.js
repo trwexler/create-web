@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Header from '../components/Header';
 
 
 const TeamEditor = (props)=> {
@@ -57,6 +58,8 @@ const TeamEditor = (props)=> {
 
 return (
     <div>
+
+        <Header id={currentId}/>
 
         <h2>Using CKEditor 5 build in React</h2>
 

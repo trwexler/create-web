@@ -62,12 +62,12 @@ const Edit = (props)=>{
             newCheckBox[e.target.name].push(e.target.value);
             setEditUser(newCheckBox);
         }
+
         else{
             console.log(webPresent);
 
         }
     }
-
 
     return(
         <div>

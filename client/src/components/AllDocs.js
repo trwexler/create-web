@@ -9,37 +9,15 @@ const AllDocs = (props) =>{
             //Basis for view page
 
         const [documentList, setDocumentList] = useState([]);
+        const {id} = props;
 
-        // const transform = (node) => {
-        //     for(let i = 0 ; i<node.length; i++){
-        //         if (node[i].type === 'string' && node[i].name === 'p') {
-        //             console.log("woroking");
-        //             return null;
-        //         }
-        //         else{
-        //             console.log(node[i]);
-        //         }
-        //     }
-        // }
-
-        // function removeTags(str) {
-        //     if ((str===null) || (str==='')){
-        //         return false;
-        //     }
-
-        //     else{
-        //         str = str.toString();
-        //         return str.replace( /(<([^>]+)>)/ig, '');
-        //     }
-
-        // }
 
         useEffect(()=>{
             //this id prop will change depending on where the current
             //user is coming from. Most likely a User's Profile,
             //in which case it'd be profileId.
             //? For now I will use Tommy's Id for set up:
-            axios.get('http://localhost:8000/api/document/user/' + "609aae2ce5e2d8390010400f",{
+            axios.get('http://localhost:8000/api/document/user/' + id,{
                 withCredentials: true
             })
                 .then((res)=>{
@@ -89,6 +67,7 @@ const AllDocs = (props) =>{
     return(
         <div>
             {/* <div id="docContent" value={documents.content}></div> */}
+            <Header id={id}/>
 
             {
                 documentList.map((item, index)=>
