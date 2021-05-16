@@ -55,24 +55,15 @@ const TeamEditor = (props)=> {
 
     }
 
-
-
-
-
-
-
-
-
-
-  return (
+return (
     <div>
 
-     <h2>Using CKEditor 5 build in React</h2>
+        <h2>Using CKEditor 5 build in React</h2>
 
 
-     <input type="text" name="name" 
-     placeholder="Document Title" 
-     onChange={handleChange} />
+        <input type="text" name="name" 
+        placeholder="Document Title" 
+        onChange={handleChange} />
 
     <button onClick={handleNonFormSubmit}>Submit</button>
         
@@ -93,6 +84,7 @@ const TeamEditor = (props)=> {
 
             onChange={ ( e, editor ) => {
                 const data = editor.getData();
+                // let dataRemovedTags = data.replace( /(<([^>]+)>)/ig, '');
                 console.log( { e, editor, data } );
                 console.log(e.name, e.value);
                 setDocuments({
@@ -112,7 +104,7 @@ const TeamEditor = (props)=> {
         {/* <button onClick={(e)=>{setDocument(data)}}></button> */}
 
     </div>
-  );
+);
 }
 
 export default TeamEditor;
