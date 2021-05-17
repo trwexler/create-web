@@ -31,9 +31,6 @@ const Feed = (props)=>{
             })
     },[])
 
-
-    
-
     useEffect(()=>{
         axios.get('http://localhost:8000/api/user/' + props.currentId)
             .then((res)=>{
@@ -109,55 +106,59 @@ const Feed = (props)=>{
 
             post.map((aPost, index)=>(
                 
-                <div className="md:w-1/2 md:mx-auto sm:w-4/5 
-                sm:mx-auto flex flex-col bg-gray-300 p-2 border-gray-400 
-                border-t-4 border-b-4 m-1 rounded" key={index+aPost._id}>
+                <div className="md:w-1/2 md:mx-auto 
+                sm:w-4/5 sm:mx-auto flex flex-col 
+                bg-gray-300 p-2 border-gray-400 
+                border-t-4 border-b-4 m-1 rounded" 
+                key={index+aPost._id}>
 
                     <div className="flex">  
-                    {/* allows a placeholder picture before db pic is
-                    loaded */}
+                    {/* allows a placeholder picture 
+                    before db pic is loaded */}
 
                         {
                             aPost.user_id.profilePicture?
+
                             <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>    
-                        <img className="w-16 my-2 rounded-3xl"
-                        src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/>
-                        </Link>
-                        :
+                            <img className="w-16 my-2 rounded-3xl"
+                            src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/>
+                            </Link>
 
-                        <Link to={`/profile/${aPost.user_id}/${currentUser._id}`}>    
-                        <img className="w-14 my-2 rounded-3xl"
-                        src={profilepic} alt=""/>
-                        </Link>
+                            :
+
+                            <Link to={`/profile/${aPost.user_id}/${currentUser._id}`}>    
+                            <img className="w-14 my-2 rounded-3xl"
+                            src={profilepic} alt=""/>
+                            </Link>
                         }
-                        {/* <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>    
-                        <img className="w-16 my-2 rounded-3xl"
-                        src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/>
-                        </Link> */}
 
-    {/* <img className="w-10 h-36 mx-auto my-2 rounded-3xl"
-    src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/> */}
 
-    {/* Fixed to allow user name to show upon change 
-    (aPost.username) and remains in memory upon 
-    refresh (aPost.user_id.username).
-    Needs better solution.
-    */}
-                {
+                        {/* Fixed to allow user 
+                        name to show upon change 
+                        (aPost.username) and remains 
+                        in memory upon refresh 
+                        (aPost.user_id.username).
+                        Needs better solution.
+                        */}
 
-                aPost.username ?
-                
-                <Link to={`/profile/${aPost.user_id}/${currentUser._id}`}>
-                <p className="text-gray-500 font-bold text-lg mt-2 p-2 hover:underline">
-                {aPost.username}
-                </p></Link>
-                
-                :<Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>
-                <p className="text-gray-500 font-bold text-lg mt-2 p-2 hover:underline">
-                {aPost.user_id.username}
-                </p></Link>
+                        {
 
-                }
+                        aPost.username ?
+                        
+                        <Link to={`/profile/${aPost.user_id}/${currentUser._id}`}>
+                        <p className="text-gray-500 font-bold text-lg mt-2 p-2 hover:underline">
+                        {aPost.username}
+                        </p>
+                        </Link>
+                        
+                        :<Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>
+                        <p className="text-gray-500 font-bold text-lg mt-2 p-2 hover:underline">
+                        {aPost.user_id.username}
+                        </p>
+                        </Link>
+
+                        }
+
                     </div>
 
                     <p className="text-md text-left text-white p-2">{aPost.content}</p>
@@ -169,9 +170,7 @@ const Feed = (props)=>{
                         <p className="text-sm">{(new Date(aPost.createdAt)).toLocaleString("en-us")}</p>
                         :
                         <p>Posted a couple seconds ago...</p>
-
                     }
-                    {/* <p className="text-sm">{(new Date(aPost.createdAt)).toLocaleString("en-us")}</p> */}
 
 
                 </div> 

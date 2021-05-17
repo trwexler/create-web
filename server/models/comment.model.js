@@ -32,6 +32,10 @@ username:{
 posting_username:{
     type: String,
     require:[true]
+},
+
+posting_profilePicture:{
+    type: String,
 }
 
 

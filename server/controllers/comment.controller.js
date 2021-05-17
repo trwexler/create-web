@@ -51,8 +51,8 @@ module.exports = {
                 // this is the data that we want to update
                     {
                     $push: { comments: newComment._id,
-                    posting_username: newComment._posting_username 
-                    } 
+                    posting_username: newComment._posting_username,
+                    posting_profilePicture: newComment._posting_profilePicture } 
                     }, 
                     {
                     new: true,  // give me the new version...not the original

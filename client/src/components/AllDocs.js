@@ -9,7 +9,7 @@ const AllDocs = (props) =>{
             //Basis for view page
 
         const [documentList, setDocumentList] = useState([]);
-        const {id} = props;
+        const {id, currentId} = props;
 
 
         useEffect(()=>{
@@ -22,28 +22,13 @@ const AllDocs = (props) =>{
             })
                 .then((res)=>{
                     console.log(res.data);
+                    console.log(currentId);
                     setDocumentList(res.data);
                 })
                 .catch((err)=>{
                     console.log(err);
                 })
             }, [])
-
-        // useEffect(()=>{
-        //     let docContent = document.getElementsByClassName('docContent');
-
-
-        //     for(let i =0; i<docContent.length;i++){
-        //         // docContent[i]["__reactProps$waol63jr44j"].children = docContent[i].toString();
-        //         docContent[i]["__reactProps$waol63jr44j"].children.replace( /(<([^>]+)>)/ig, '');
-        //         console.log(docContent[i]["__reactProps$waol63jr44j"].children);
-        //     }
-
-            
-
-        //     }, [])
-
-
 
 
         const clickHandler = (e)=>{
@@ -67,15 +52,16 @@ const AllDocs = (props) =>{
     return(
         <div>
             {/* <div id="docContent" value={documents.content}></div> */}
-            <Header id={id}/>
+            <Header id={props.currentUser._id}/>
 
             {
                 documentList.map((item, index)=>
                 (
-                    <div className="w-1/2 mx-auto">
+                    <div className="w-1/2 mx-auto"
+                    key={index}>
                         <button onClick={clickHandler}>{item.name}</button>
-                        <p className="hidden m-20" key={index}>
-                        {ReactHtmlParser(item.content)}</p>
+                        <div className="hidden m-20" key={index}>
+                        {ReactHtmlParser(item.content)}</div>
                     </div>
                     
                 ))

@@ -12,7 +12,7 @@ import Upload from '../components/Upload';
 
 const Profile = (props) =>{
 
-    const {profileId, currentUser, setCurrentUser} = props;
+    const {profileId, currentUser, setCurrentUser, currentId} = props;
     const [userProfile, setUserProfile] = useState({});
     const [webList, setWebList] = useState([]);
     const [comments, setComments] = useState([]);    
@@ -22,7 +22,9 @@ const Profile = (props) =>{
         posting_user_id: props.currentId,
         profile_user_id: profileId, 
         username: "",
-        posting_username: ""
+        posting_username: "",
+        posting_profilePicture: ""
+
     });
 
 useEffect(()=>{
@@ -32,6 +34,7 @@ useEffect(()=>{
         profile_user_id: userProfile._id, 
         username: userProfile.username,
         posting_username: currentUser.username,
+        posting_profilePicture: currentUser.profilePicture,
 
     })
 },[userProfile, currentUser])
@@ -128,6 +131,9 @@ const handleChange = (e) => {
             {/* Conditional Render that determines
             whether a user is on his/her own 
             page or another user's */}
+
+
+
             {  
                 //Will run if the user is on his/her own page
                 props.profileId == props.currentId
@@ -135,43 +141,63 @@ const handleChange = (e) => {
 
                 <div>
 
-                    {/* Profile picture/Change picture section */}
-                    <div className="rounded h-full w-1/2 
-                    mx-auto py-1 mx-2 m-2 bg-white">
-                        {/* <img className="w-54 h-36 mx-auto my-2 rounded-3xl"
-                        src={`http://localhost:8000/${currentUser.profilePicture}`} alt="" /> */}
-                        <Upload userProfile={userProfile} currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-                    </div>
+                    {/* Profile picture/Change picture section*/}
+                    {/* <div className="rounded h-full shadow
+                    mx-auto py-3 mx-2 mb-4 bg-white">
+                        <Upload userProfile={userProfile} 
+                        currentId={props.currentId} 
+                        currentUser={currentUser} 
+                        setCurrentUser={setCurrentUser}/>
+                    </div>  */}
 
-                    <div className="bg-white shadow">
+                    <div className="bg-white shadow mx-auto">
 
                         <h2 className="text-2xl p-3 font-mono">
                         Welcome home, {userProfile.username}!
                         </h2>
+
+                        <div className="rounded h-full
+                        mx-auto py-3 mx-2 mb-4 bg-white">
+                            <Upload userProfile={userProfile} 
+                            currentId={props.currentId} 
+                            currentUser={currentUser} 
+                            setCurrentUser={setCurrentUser}/>
+
+                            <Link to={`/teameditor/${currentUser._id}`}>
+                            <button className="m-3">
+                            Get to writing!
+                            </button>
+                            </Link>
+
+                            <Link to={`/alldocs/${profileId}`}>
+                            <button className="m-3">
+                            View All Writings!
+                            </button>
+                            </Link>
+
+                            </div>
+                            <p className="text-sm p-3">
+                            {userProfile.bio}
+                            </p>
+
+                            <button 
+                            onClick={(e)=>navigate(`/edit/${props.currentId}`)}>
+                            Edit
+                            </button>
                         
-                        <Link to={`/teameditor/${currentUser._id}`}>
-                        <button>
-                        Get to writing!
-                        </button>
-                        </Link>
 
-                        <Link profileId={profileId} to={`/alldocs/${profileId}`}>
-                        <button>
-                        View All Writings!
-                        </button>
-                        </Link>
-
-                        <p className="text-sm p-3">{userProfile.bio}</p>
-
-                        <button 
-                        onClick={(e)=>navigate(`/edit/${props.currentId}`)}>
-                        Edit
-                        </button>
 
                     </div>
+                    
+
+
+
+
                     {/* Webs Section */}
-                    <div className="bg-white w-5/6 border mx-auto p-4 my-3 rounded shadow">
-                        <h3 className="text-left text-xl pb-3">Your Webs</h3>
+                    <div className="md:w-1/2 md:mx-auto 
+                    sm:w-4/5 sm:mx-auto bg-white w-5/6 
+                    border mx-auto p-4 my-3 rounded shadow">
+                        <h3 className="text-left text-2xl pb-3">Your Webs</h3>
                         <hr/>
                         {/* Runs if user is on his/her own page 
                         and hasn't added webs. */}
@@ -189,8 +215,10 @@ const handleChange = (e) => {
 
                                 <p onClick={(e)=>navigate(
                                 `/webs/${props.currentId}/${web}`)} 
-                                key={index} className="p-3 m-1 rounded-3xl 
-                                border shadow flex flex-wrap">
+                                key={index} className="p-6 w-auto
+                                cursor-pointer rounded-full m-1 mx-auto
+                                border shadow text-xl hover:bg-blue-100 
+                                focus:outline-none hover:text-white">
                                 {web}
                                 </p>
 
@@ -217,16 +245,22 @@ const handleChange = (e) => {
                         src={`http://localhost:8000/${userProfile.profilePicture}`} alt=""/>
 
                         <h2 className="text-2xl p-3">{userProfile.username}</h2>
-                        <Link to={`/alldocs/${userProfile._id}`}><button>
+                        <Link to={`/alldocs/${userProfile._id}`}>
+                        <button>
                         View All Writings!
-                    </button></Link>
+                        </button>
+                        </Link>
 
                         <p className="text-sm p-3">{userProfile.bio}</p>
 
                     </div>
 
-                    <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
-                        <h3 className="text-xl p-3">{userProfile.username}'s webs!</h3>
+                    <div className="md:w-1/2 md:mx-auto 
+                    sm:w-4/5 sm:mx-auto bg-white w-5/6 
+                    border mx-auto p-4 my-3 rounded shadow">
+                        <h3 className="text-xl p-3">
+                        {userProfile.username}'s webs!
+                        </h3>
 
                         {/* Runs if user is not on their 
                         page and THEY DO NOT HAVE webs. */}
@@ -239,15 +273,20 @@ const handleChange = (e) => {
 
                         {/* Runs if user is not on their 
                         page and THEY DO HAVE webs. */}
+                        <div className="flex flex-wrap mt-3">
                         {
                             webList.map((web, index)=>(
                                 <p onClick={(e)=>navigate(
                                 `/webs/${props.currentId}/${web}`)} 
-                                key={index} className="block">
+                                key={index} className="p-6 w-auto
+                                cursor-pointer rounded-full m-1
+                                border shadow text-xl hover:bg-blue-100 focus:outline-none hover:text-white">
                                 {web}
                                 </p>
                             ))
                         }
+                        </div>
+
                     </div>
 
                 </div>
@@ -278,22 +317,21 @@ const handleChange = (e) => {
                 {
                     comments.map((comment, index)=>(
                         
-                        <div className="flex flex-col shadow bg-gray-300 
-                        p-2 rounded m-2" key={index}>
+                        <div className="md:w-1/2 md:mx-auto 
+                sm:w-4/5 sm:mx-auto flex flex-col 
+                bg-gray-300 p-2 border-gray-400 
+                border-t-4 border-b-4 m-1 rounded" key={index}>
                             {/* Profile Picture/ username div */}
-                            <div>
+                            <div className="flex">
 
-                                <Link to={`/profile/${comment.user_id}
-                                /${currentUser._id}`}>  
+                                <Link to={`/profile/${comment.posting_user_id}/${currentUser._id}`}>  
 
                                 <img className="w-16 rounded-3xl"
-                                    src={`http://localhost:8000/
-                                    ${comment.posting_profilePicture}`} alt=""/>
+                                src={`http://localhost:8000/${comment.posting_profilePicture}`}alt=""/>
 
                                 </Link>
                                 
-                                <Link to={`/profile/${comment.posting_user_id}/
-                                ${props.currentId}`}>
+                                <Link to={`/profile/${comment.posting_user_id}/${props.currentId}`}>
                                 <p className="w-auto 
                                 text-gray-500 
                                 font-semibold mt-2 p-1 ">
@@ -339,6 +377,7 @@ export default Profile;
 // const [comments, setComments] = useState([]);
 // const [currentUser, setCurrentUser] = useState({});
 // const [newComments, setNewComments] = useState({});
+
 
 
 

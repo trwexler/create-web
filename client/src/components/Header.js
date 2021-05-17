@@ -60,11 +60,20 @@ const Header = (props)=>{
                     {/* CreateWeb Logo */}
                     <h1 className="md:mx-0 text-3xl mx-auto p-2 mt-2">create(Web)</h1>
                     
-                    <Link to={`/feed/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Home</li></Link>
-                    <Link to={`/profile/${props.id}/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Profile</li></Link>
-                    <Link to={`/webs/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Webs</li></Link>
-                    <Link to={`/teameditor/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Write</li></Link>
-                    <Link to={`/alldocs/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Collection</li></Link>
+                    <Link to={`/feed/${props.id}`}>
+                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Home</li></Link>
+
+                    <Link to={`/profile/${props.id}/${props.id}`}>
+                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Profile</li></Link>
+
+                    <Link to={`/webs/${props.id}`}>
+                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Webs</li></Link>
+
+                    <Link to={`/teameditor/${props.id}`}>
+                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Write</li></Link>
+
+                    <Link to={`/alldocs/${props.id}`}>
+                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Collection</li></Link>
 
                     <div className="relative cursor-pointer inline-block text-left">
                     
