@@ -71,7 +71,8 @@ const Feed = (props)=>{
                 })
 //new.. need to check
 
-                let fullPostList = [...post, {content: newPost.content, likes:0, user_id: res.data._id, username: res.data.username}];
+                let fullPostList = [...post, {content: newPost.content, likes:0, user_id: res.data._id, 
+                username: res.data.username}];
                 setPost(fullPostList); 
 
 
@@ -99,7 +100,7 @@ const Feed = (props)=>{
                 <label className="m-2">Share your latest with us!</label>
                 <input onChange={handleChange} value={newPost.content} type="text" name="content"/>
                 <br/>
-                <button className="mx-auto my-3 p-3 rounded shadow-md w-24">Post</button>
+                <button className="mx-auto my-3 p-3 rounded shadow-md w-24 hover:bg-blue-100">Post</button>
             </form>
 
             <div className="flex flex-col-reverse">
@@ -108,11 +109,31 @@ const Feed = (props)=>{
 
             post.map((aPost, index)=>(
                 
-                <div className="flex flex-col border bg-gray-300 p-2 border-gray-400 border-t-2 border-b-2 m-1" key={index+aPost._id}>
+                <div className="md:w-1/2 md:mx-auto sm:w-4/5 
+                sm:mx-auto flex flex-col bg-gray-300 p-2 border-gray-400 
+                border-t-4 border-b-4 m-1 rounded" key={index+aPost._id}>
 
-                    <div className="flex">
-                        <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>    <img className="w-16  mx-auto my-2 rounded-3xl"
-    src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/></Link>
+                    <div className="flex">  
+                    {/* allows a placeholder picture before db pic is
+                    loaded */}
+
+                        {
+                            aPost.user_id.profilePicture?
+                            <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>    
+                        <img className="w-16 my-2 rounded-3xl"
+                        src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/>
+                        </Link>
+                        :
+
+                        <Link to={`/profile/${aPost.user_id}/${currentUser._id}`}>    
+                        <img className="w-14 my-2 rounded-3xl"
+                        src={profilepic} alt=""/>
+                        </Link>
+                        }
+                        {/* <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>    
+                        <img className="w-16 my-2 rounded-3xl"
+                        src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/>
+                        </Link> */}
 
     {/* <img className="w-10 h-36 mx-auto my-2 rounded-3xl"
     src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/> */}
@@ -127,24 +148,32 @@ const Feed = (props)=>{
                 aPost.username ?
                 
                 <Link to={`/profile/${aPost.user_id}/${currentUser._id}`}>
-                <p className="text-gray-500 font-semibold mt-2">
+                <p className="text-gray-500 font-bold text-lg mt-2 p-2 hover:underline">
                 {aPost.username}
                 </p></Link>
                 
                 :<Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>
-                <p className="text-gray-500 font-semibold mt-2">
+                <p className="text-gray-500 font-bold text-lg mt-2 p-2 hover:underline">
                 {aPost.user_id.username}
                 </p></Link>
 
                 }
                     </div>
 
-                    <p className="text-sm text-left text-white p-2">{aPost.content}</p>
+                    <p className="text-md text-left text-white p-2">{aPost.content}</p>
+                    <LikeButton likes={aPost.likes} post={post} 
+                    aPost={aPost} setPost={setPost}  postId={aPost._id}/>
+
+                    {
+                        aPost.createdAt?
+                        <p className="text-sm">{(new Date(aPost.createdAt)).toLocaleString("en-us")}</p>
+                        :
+                        <p>Posted a couple seconds ago...</p>
+
+                    }
+                    {/* <p className="text-sm">{(new Date(aPost.createdAt)).toLocaleString("en-us")}</p> */}
 
 
-                    <LikeButton likes={aPost.likes} post={post} aPost={aPost} setPost={setPost}  postId={aPost._id}/>
-
-                    
                 </div> 
             ))}
             </div>

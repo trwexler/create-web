@@ -16,11 +16,13 @@ const Edit = (props)=>{
         'Looking for team-writing',
         'Publisher',
         'Just browsing!',
-        'Looking for feedback'
+        'Looking for feedback',
+        'Reset'
     ];
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/user/' + props.currentId,{
+        axios.get('http://localhost:8000/api/user/' 
+        + props.currentId, {
             withCredentials:true
         })
             .then((res)=>{
@@ -34,14 +36,16 @@ const Edit = (props)=>{
 
     const submitHandler = (e)=>{
         e.preventDefault();
-        axios.put('http://localhost:8000/api/user/' + props.currentId, editUser,
+        axios.put('http://localhost:8000/api/user/' 
+        + props.currentId, editUser,
             {
                 withCredentials: true
             })
             .then((res)=>{
                 console.log(res.data);
                 setEditUser(res.data);
-                navigate(`/profile/${editUser._id}/${editUser._id}`)
+                navigate(`/profile/${editUser._id}/
+                ${editUser._id}`)
             })
     }
 
@@ -56,7 +60,6 @@ const Edit = (props)=>{
         let newCheckBox = { ...editUser };
         let webPresent = editUser.webs.indexOf(e.target.value);
 
-
         if(webPresent == -1){
             console.log(webPresent);
             newCheckBox[e.target.name].push(e.target.value);
@@ -65,39 +68,35 @@ const Edit = (props)=>{
 
         else{
             console.log(webPresent);
-
         }
     }
 
     return(
         <div>
 
-        <Header id={props.currentId}/>
-            <form onSubmit={submitHandler}>
+            <Header id={props.currentId}/>
+
+            <form className="mx-auto" onSubmit={submitHandler}>
 
                 <input onChange={inputChange} name="bio" 
                 type="text" placeholder="bio" 
                 value={editUser.bio}/>
 
-                {/* <label onChange={inputChange} 
-                name="webs" 
-                value={editUser.webs}> */}
                 {
-                    webList.map((webs,index)=>(
-                        <div> 
-                        <input onChange={checkBoxChange} type="checkbox" name="webs" 
-                        value={webs} key={'webs'+index}/>
-                        {webs}</div>
-                    ))
+                webList.map((webs,index)=>(
+                    <div className="mx-auto"  > 
+                    <input className="mx-auto text-left" onChange={checkBoxChange} type="checkbox" name="webs" 
+                    value={webs} key={'webs'+index}/>
+                    {webs}</div>
+                ))
                 }
 
-
                 <br/>
-
 
                 <input type="submit" value = "Update"/>
 
             </form>
+
         </div>
     )
 }

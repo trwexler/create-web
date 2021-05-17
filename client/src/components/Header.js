@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const Header = (props)=>{
 
-    //Cookie “usertoken” has been rejected because it is already expired.
+
     const logout = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/user/logout", { 
@@ -46,45 +46,73 @@ const Header = (props)=>{
 
     return(
         <>
-            <nav className="bg-gray-100 ">
-                <button onClick={(e) => logout(e) }>Logout</button>
+            <nav className="bg-gray-100 py-2">
+                <span className="absolute right-5 
+                top-0 mt-1 hover:text-blue-200 hover:underline 
+                cursor-pointer" 
+                onClick={(e) => logout(e) }>Logout
+                </span>
                 <ul className="flex justify-between px-4 py-3">
-                    <Link to={`/feed/${props.id}`}> <img className="w-10 mt-2" src={home}  alt=""/></Link>
-                    <h1 className="text-3xl  p-2">create(Web)</h1>
-                    {/* <img className="lg:hidden w-7 mb-" src={toggle} alt=""/> */}
-                    
-<div className="relative cursor-pointer inline-block text-left">
-    <div>
-        <img src={toggle} onClick={menuHandler} className="py-1 text-sm  w-12" id="options-menu"/>
 
-    </div>
-    <div id="mobileMenu" className="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5"
-    >
-        <div className="py-1 " role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <a href="#" className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
-                <span className="flex flex-col">
-                    <span>
-                        Home
-                    </span>
-                </span>
-            </a>
-            <a href="#" className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
-                <span className="flex flex-col">
-                    <span>
-                        Profile
-                    </span>
-                </span>
-            </a>
-            <a href="#" className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
-                <span className="flex flex-col">
-                    <span>
-                        Webs
-                    </span>
-                </span>
-            </a>
-        </div>
-    </div>
-</div>
+                    {/* mobile home icon */}
+                    <Link to={`/feed/${props.id}`}> <img className="md:hidden lg:hidden w-10 mt-4" src={home}  alt=""/></Link>
+                    
+                    {/* CreateWeb Logo */}
+                    <h1 className="md:mx-0 text-3xl mx-auto p-2 mt-2">create(Web)</h1>
+                    
+                    <Link to={`/feed/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Home</li></Link>
+                    <Link to={`/profile/${props.id}/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Profile</li></Link>
+                    <Link to={`/webs/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Webs</li></Link>
+                    <Link to={`/teameditor/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Write</li></Link>
+                    <Link to={`/alldocs/${props.id}`}><li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Collection</li></Link>
+
+                    <div className="relative cursor-pointer inline-block text-left">
+                    
+                        <img src={toggle} onClick={menuHandler} 
+                        className="md:hidden text-sm mt-2 w-14" id="options-menu"/>
+                        
+
+                        <div id="mobileMenu" className="hidden origin-top-right 
+                        absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white 
+                        dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+
+                            <div className="py-1 " role="menu" 
+                            aria-orientation="vertical" aria-labelledby="options-menu">
+
+                                <a href="#" className="block block px-4 py-2 text-md text-gray-700 
+                                hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 
+                                dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                    <span className="flex flex-col">
+                                        <span>
+                                            Home
+                                        </span>
+                                    </span>
+                                </a>
+
+                                <a href="#" className="block block px-4 py-2 text-md text-gray-700 
+                                hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 
+                                dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                    <span className="flex flex-col">
+                                        <span>
+                                            Profile
+                                        </span>
+                                    </span>
+                                </a>
+
+                                <a href="#" className="block block px-4 py-2 text-md text-gray-700 
+                                hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100
+                                dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                    <span className="flex flex-col">
+                                        <span>
+                                            Webs
+                                        </span>
+                                    </span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </ul>
             </nav>
         </>

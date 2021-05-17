@@ -27,14 +27,13 @@ const LikeButton = (props)=>{
     }
 
     return(
-        <div className="flex bg-gray-100 cursor-pointer mx-auto my-3 p-3 rounded shadow-md w-24"
+        <div className="flex bg-gray-100 cursor-pointer 
+        mx-auto my-auto p-2 rounded-full shadow-md w-14 h-14 hover:bg-blue-100"
         onClick={(e)=>likeHandler(postId)}>
 
-                <img className="w-4" 
-                
+                <img className="w-4 mx-auto" 
                 src={like} alt="UPVOTE"/>
-                <p className=" mx-1">Like</p>
-                <p name="likes" value={aPost.likes} 
+                <p className="mx-auto mt-2" name="likes" value={aPost.likes} 
                 >{aPost.likes}</p>
 
         </div>

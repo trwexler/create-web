@@ -49,10 +49,9 @@ useEffect(()=>{
                 console.log(res.data);
                 setUserProfile(res.data);
                 console.log(res.data.webs);
-                console.log("profiles won't update when switching between",
-                userProfile);
                 setWebList(res.data.webs);
                 setComments(res.data.comments);
+                console.log(res.data.comments);
             })
             .catch((err)=>{
                 console.log(err);
@@ -102,31 +101,10 @@ const submitHandler = (e)=>{
     })
         .then((res)=>{
             console.log(res.data);
-
-        // setNewComments({
-        //     content:"",
-        //     likes:0,
-        //     posting_user_id: props.currentId,
-        //     profile_user_id: profileId, 
-        //     username: currentUser.username,
-        //     posting_username: currentUser.username
-        // })
-
             setNewComments({
                 ...newComments,
                 content: ""
             })
-// //new.. need to check
-            // let fullCommentList = [...comments, 
-            //     res.data
-            //     // {content: newComments.content, 
-            //     //     likes:0, 
-            //     //     posting_user_id: props.currentId,
-            //     //     profile_user_id: profileId, 
-            //     //     username: currentUser.username,
-            //     //     posting_username: currentUser.username
-            //     // }
-            // ];
 
             setComments(res.data.comments);
         })
@@ -145,53 +123,58 @@ const handleChange = (e) => {
 
     return(
         <div>
-        {/* <img src={profPics}  alt="" /> */}
             <Header id={props.currentId}/>
-            {
+            
+            {/* Conditional Render that determines
+            whether a user is on his/her own 
+            page or another user's */}
+            {  
                 //Will run if the user is on his/her own page
                 props.profileId == props.currentId
                 ?
+
                 <div>
 
-                    <div className="rounded h-full w-1/2 mx-auto py-1 mx-2 m-2 bg-white">
-
+                    {/* Profile picture/Change picture section */}
+                    <div className="rounded h-full w-1/2 
+                    mx-auto py-1 mx-2 m-2 bg-white">
                         {/* <img className="w-54 h-36 mx-auto my-2 rounded-3xl"
                         src={`http://localhost:8000/${currentUser.profilePicture}`} alt="" /> */}
-
                         <Upload userProfile={userProfile} currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-
-
                     </div>
-
-
-                {/* <img className="w-24 mx-auto"
-                src={`http://localhost:8000/${currentUser.profilePicture}`} alt="" /> */}
-                {/* <Upload currentId={props.currentId} currentUser={currentUser} setCurrentUser={setCurrentUser}/> */}
 
                     <div className="bg-white shadow">
-                        <h2 className="text-2xl p-3 font-mono">Welcome home, {userProfile.username}!</h2>
+
+                        <h2 className="text-2xl p-3 font-mono">
+                        Welcome home, {userProfile.username}!
+                        </h2>
                         
-                    <Link to={`/teameditor/${currentUser._id}`}><button>
+                        <Link to={`/teameditor/${currentUser._id}`}>
+                        <button>
                         Get to writing!
-                    </button></Link>
-                    <Link profileId={profileId} to={`/alldocs/${profileId}`}><button>
+                        </button>
+                        </Link>
+
+                        <Link profileId={profileId} to={`/alldocs/${profileId}`}>
+                        <button>
                         View All Writings!
-                    </button></Link>
+                        </button>
+                        </Link>
+
                         <p className="text-sm p-3">{userProfile.bio}</p>
-                        <button onClick={(e)=>navigate(`/edit/${props.currentId}`)}>Edit</button>
+
+                        <button 
+                        onClick={(e)=>navigate(`/edit/${props.currentId}`)}>
+                        Edit
+                        </button>
+
                     </div>
-
-
-
+                    {/* Webs Section */}
                     <div className="bg-white w-5/6 border mx-auto p-4 my-3 rounded shadow">
                         <h3 className="text-left text-xl pb-3">Your Webs</h3>
                         <hr/>
-
-
-
-
-
-                {/* Runs if user is on his/her own page and hasn't added webs. */}
+                        {/* Runs if user is on his/her own page 
+                        and hasn't added webs. */}
                         {
                             props.profileId == props.currentId
                             && userProfile.webs == "" ?
@@ -200,22 +183,31 @@ const handleChange = (e) => {
                         }
 
                         <div className="flex flex-wrap mt-3">
+
                         {
                             webList.map((web, index)=>(
-                                <p onClick={(e)=>navigate(`/webs/${props.currentId}/${web}`)} 
-                                key={index} className="p-3 m-1 rounded-3xl border shadow flex flex-wrap">{web}</p>
+
+                                <p onClick={(e)=>navigate(
+                                `/webs/${props.currentId}/${web}`)} 
+                                key={index} className="p-3 m-1 rounded-3xl 
+                                border shadow flex flex-wrap">
+                                {web}
+                                </p>
+
                             ))
                         }
+
                         </div>
 
                         {/* <p>{userProfile.webs}</p> */}
                         <button onClick={()=>navigate(`/edit/${props.currentId}`)}>Edit</button>
                     </div>
-
-
-                </div>
+                {/* End if user is on own page */}
+                </div> 
                 
                 //Runs if user is NOT on their page
+                //No options to change pics/edit info
+                //Changes some wording
                 :
                 <div>
 
@@ -235,8 +227,9 @@ const handleChange = (e) => {
 
                     <div className="bg-white w-5/6 border mx-auto p-2 my-3 rounded shadow">
                         <h3 className="text-xl p-3">{userProfile.username}'s webs!</h3>
-                {/* Runs if user is not on their page
-                and they haven't added any webs. */}
+
+                        {/* Runs if user is not on their 
+                        page and THEY DO NOT HAVE webs. */}
                         {
                             props.profileId !== props.currentId
                             && userProfile.webs == "" ?
@@ -244,39 +237,82 @@ const handleChange = (e) => {
                             :null
                         }
 
+                        {/* Runs if user is not on their 
+                        page and THEY DO HAVE webs. */}
                         {
                             webList.map((web, index)=>(
-                                <p onClick={(e)=>navigate(`/webs/${props.currentId}/${web}`)} key={index} className="block">{web}</p>
+                                <p onClick={(e)=>navigate(
+                                `/webs/${props.currentId}/${web}`)} 
+                                key={index} className="block">
+                                {web}
+                                </p>
                             ))
                         }
-                    </div>   
+                    </div>
+
                 </div>
             }
+            {/* End conditional render pre-comments section */}
 
+            {/* COMMENT FORM */}
             <form onSubmit={submitHandler}>
-                <label className="m-2">Share your latest with us!</label>
+
+                <label className="m-2">
+                Share your latest with us!
+                </label>
                 <br/>
-                <input onChange={handleChange} value={newComments.content} type="text" name="content"/>
+                <input onChange={handleChange} 
+                value={newComments.content} 
+                type="text" name="content"/>
                 <br/>
-                <button className="mx-auto my-3 p-3 rounded shadow-md w-24">Post</button>
+                <button className="mx-auto my-3 
+                p-3 rounded shadow-md w-24">
+                Post
+                </button>
+
             </form>
 
+            {/* List of comments posted to profile user's page */}
+            {/* Flex-col-reverse allows newest to be up top */}
             <div className="flex flex-col-reverse">
                 {
                     comments.map((comment, index)=>(
-                        <div className="flex flex-col shadow bg-gray-300 p-2 rounded m-2" key={index}>
                         
-                        
-                    <Link className="inline w-auto" to={`/profile/${comment.posting_user_id}/${props.currentId}`}><p className="inline w-auto text-gray-500 font-semibold mt-2 ">
+                        <div className="flex flex-col shadow bg-gray-300 
+                        p-2 rounded m-2" key={index}>
+                            {/* Profile Picture/ username div */}
+                            <div>
 
-                    {comment.posting_username}
-                    </p></Link>
+                                <Link to={`/profile/${comment.user_id}
+                                /${currentUser._id}`}>  
 
-                    <p className="text-gray-500 font-semibold mt-2">
-                    {comment.content}</p>
-                    <p className="text-gray-500 font-semibold mt-2">
-                    {comment.createdAt}</p>
-                </div>
+                                <img className="w-16 rounded-3xl"
+                                    src={`http://localhost:8000/
+                                    ${comment.posting_profilePicture}`} alt=""/>
+
+                                </Link>
+                                
+                                <Link to={`/profile/${comment.posting_user_id}/
+                                ${props.currentId}`}>
+                                <p className="w-auto 
+                                text-gray-500 
+                                font-semibold mt-2 p-1 ">
+                                {comment.posting_username}
+                                </p>
+                                </Link>
+
+                            </div>
+
+                            <p className="text-gray-500 
+                            font-semibold mt-2">
+                            {comment.content}
+                            </p>
+
+                            <span className="text-gray-500 text-sm mt-2">
+                            {(new Date(comment.createdAt)).toLocaleString("en-us")}
+                            </span>
+
+                        </div>
                     ))
                 }
             </div>
