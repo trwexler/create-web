@@ -112,7 +112,7 @@ return(
 
             <select className="border p-3 m-2 cursor-pointer" name="web" id="">
 
-                <option value="" default value>Search by webs</option>
+                <option value="" default>Search by webs</option>
 
                 <option onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Writer">Writer</option>
