@@ -36,15 +36,15 @@ function App() {
 
         <Edit path="/edit/:currentId"/>
 
-        <Webs currentId={currentId} 
+        <Webs
         setCurrentId={setCurrentId} 
         path="/webs/:currentId"/>
 
-        <Webs currentId={currentId} 
+        <Webs
         setCurrentId={setCurrentId} 
         path="/webs/:currentId/:web"/>
 
-        <TeamEditor currentId={currentId} 
+        <TeamEditor
         currentUser={currentUser} 
         setCurrentUser={setCurrentUser} 
         setCurrentId={setCurrentId}
