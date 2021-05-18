@@ -53,24 +53,96 @@ return(
     <div>
         <Header id={props.currentId}/>
 
-
-
         <form className="border bg-white py-5" onSubmit={submitHandler}>
         
         <h1 className="text-3xl mb-3">Webs</h1>
-            <select className="border p-3 m-2" name="web" id="">
-                <option value="" disabled selected>Search by webs</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Writer">Writer</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Writer - Looking for work!">Writer - Looking for work!</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Editor">Editor</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Editor - Looking for work!">Editor - Looking for work!</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Looking for team-writing">Looking for team-writing</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Publisher">Publisher</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Just browsing!">Just browsing!</option>
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Looking for feedback">Looking for feedback</option>
+
+    {/* <div className="flex flex-wrap -mx-px overflow-hidden 
+    sm:-mx-px md:-mx-1 lg:-mx-1 xl:-mx-1">
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Writer"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Writer
+        </div>
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Writer - Looking for work!"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Writer - Looking for work!
+        </div>
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Editor"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Editor
+        </div>
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Editor - Looking for work!"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Editor - Looking for work!
+        </div>
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Looking for team-writing"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Looking for team-writing
+        </div>
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Publisher"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Publisher
+        </div>
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Just browsing!"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Just browsing!
+        </div>
+
+        <div onClick={(e)=>setSelectedWeb(e.target.value)} value="Looking for feedback"
+        className="border my-px px-px w-full overflow-hidden sm:my-px
+        sm:px-px md:my-1 md:px-1 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+        Looking for feedback
+        </div>
+    </div> */}
+
+
+            <select className="border p-3 m-2 cursor-pointer" name="web" id="">
+
+                <option value="" default value>Search by webs</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Writer">Writer</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Writer - Looking for work!">Writer - Looking for work!</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Editor">Editor</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Editor - Looking for work!">Editor - Looking for work!</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Looking for team-writing">Looking for team-writing</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Publisher">Publisher</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Just browsing!">Just browsing!</option>
+
+                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                value="Looking for feedback">Looking for feedback</option>
+
             </select>
+            
             <br/>
-            <input className="w-56" type="submit" value="Search"/>
+            <input className="w-56 cursor-pointer 
+            hover:bg-blue-100 hover:text-white" type="submit" value="Search"/>
         </form>
         {
             selectedWeb?
@@ -85,7 +157,7 @@ return(
             {
                 userList.map((user, index)=>(
 
-                <div>
+                <div key={index}>
                     {/* <p onClick={(e)=>navigate(`/profile/${user._id}/${props.currentId}`)}>{user.username}</p> */}
 
 

@@ -58,7 +58,7 @@ const Header = (props)=>{
                     <Link to={`/feed/${props.id}`}> <img className="md:hidden lg:hidden w-10 mt-4" src={home}  alt=""/></Link>
                     
                     {/* CreateWeb Logo */}
-                    <h1 className="md:mx-0 text-3xl mx-auto p-2 mt-2">create(Web)</h1>
+                    <h1 className="md:mx-0 cursor-default text-3xl mx-auto p-2 mt-2">create(Web)</h1>
                     
                     <Link to={`/feed/${props.id}`}>
                     <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Home</li></Link>
@@ -88,17 +88,18 @@ const Header = (props)=>{
                             <div className="py-1 " role="menu" 
                             aria-orientation="vertical" aria-labelledby="options-menu">
 
-                                <a href="#" className="block block px-4 py-2 text-md text-gray-700 
+                                <Link to={`/feed/${props.id}`} 
+                                className="block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 
-                                dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                dark:hover:text-white dark:hover:bg-gray-600" role="menuitem"> 
                                     <span className="flex flex-col">
                                         <span>
                                             Home
                                         </span>
                                     </span>
-                                </a>
+                                </Link>
 
-                                <a href="#" className="block block px-4 py-2 text-md text-gray-700 
+                                <Link to={`/profile/${props.id}/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 
                                 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
                                     <span className="flex flex-col">
@@ -106,9 +107,9 @@ const Header = (props)=>{
                                             Profile
                                         </span>
                                     </span>
-                                </a>
+                                </Link>
 
-                                <a href="#" className="block block px-4 py-2 text-md text-gray-700 
+                                <Link to={`/webs/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100
                                 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
                                     <span className="flex flex-col">
@@ -116,7 +117,27 @@ const Header = (props)=>{
                                             Webs
                                         </span>
                                     </span>
-                                </a>
+                                </Link>
+
+                                <Link to={`/teameditor/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
+                                hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100
+                                dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                    <span className="flex flex-col">
+                                        <span>
+                                            Write
+                                        </span>
+                                    </span>
+                                </Link>
+
+                                <Link to={`/alldocs/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
+                                hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100
+                                dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                    <span className="flex flex-col">
+                                        <span>
+                                            Collection
+                                        </span>
+                                    </span>
+                                </Link>
 
                             </div>
 

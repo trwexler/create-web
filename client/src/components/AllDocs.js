@@ -57,22 +57,20 @@ const AllDocs = (props) =>{
             {
                 documentList.map((item, index)=>
                 (
-                    <div className="w-1/2 mx-auto"
+                    <div className="mx-auto"
                     key={index}>
-                        <button onClick={clickHandler}>{item.name}</button>
-                        <div className="hidden m-20" key={index}>
+                        <button className="w-auto" onClick={clickHandler}>{item.name}</button>
+                        <div className="hidden mx-3 px-5 py-2 md:px-10 md:py-5 text-left border" key={index}>
                         {ReactHtmlParser(item.content)}</div>
                     </div>
                     
                 ))
             }
 
-
         </div>
 
     )
 }
-
 
 export default AllDocs;
 
