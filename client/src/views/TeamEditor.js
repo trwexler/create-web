@@ -3,6 +3,7 @@ import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Header from '../components/Header';
+import {navigate} from '@reach/router';
 
 
 const TeamEditor = (props)=> {
@@ -49,6 +50,7 @@ const TeamEditor = (props)=> {
         })
             .then((res)=>{
                 console.log(res.data);
+                navigate(`/alldocs/${currentId}`);
             })
             .catch((err)=>{
                 console.log(err);
@@ -61,19 +63,19 @@ return (
 
         <Header id={currentId}/>
 
-        <h2>Using CKEditor 5 build in React</h2>
+        <h2 className="text-2xl m-3">Writer's Corner</h2>
 
 
-        <input type="text" name="name" 
-        placeholder="Document Title" 
+        <input className="mb-5" type="text" name="name" 
+        placeholder="Your Title" 
         onChange={handleChange} />
 
-    <button onClick={handleNonFormSubmit}>Submit</button>
+        <button onClick={handleNonFormSubmit}>Submit</button>
         
         <CKEditor
             name="content"
             editor={ ClassicEditor }
-            data="<p>Hello from CKEditor 5!</p>"
+            data="<p>Type away, enter a title and hit submit. It all starts with a single key-stroke.</p>"
             onReady={ editor => {
                 // You can store the "editor" and use when it is needed.
                 console.log( 'Editor is ready to use!', editor );

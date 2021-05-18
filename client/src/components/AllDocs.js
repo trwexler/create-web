@@ -10,6 +10,7 @@ const AllDocs = (props) =>{
 
         const [documentList, setDocumentList] = useState([]);
         const {id, currentId} = props;
+        const [userName, setUserName] = useState("");
 
 
         useEffect(()=>{
@@ -29,6 +30,21 @@ const AllDocs = (props) =>{
                     console.log(err);
                 })
             }, [])
+
+            useEffect(()=>{
+                axios.get('http://localhost:8000/api/user/' + id,{
+                    withCredentials: true
+                })
+                    .then((res)=>{
+                        console.log(res.data);
+                        setUserName(res.data.username);
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                    })
+            },[])
+
+
 
 
         const clickHandler = (e)=>{
@@ -53,6 +69,9 @@ const AllDocs = (props) =>{
         <div>
             {/* <div id="docContent" value={documents.content}></div> */}
             <Header id={props.currentUser._id}/>
+            <h1 className="text-2xl m-3">{userName}'s Collection</h1>
+            <p>Click tiles to discover the story within.</p>
+            <hr/>
 
             {
                 documentList.map((item, index)=>

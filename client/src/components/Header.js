@@ -48,7 +48,7 @@ const Header = (props)=>{
         <>
             <nav className="bg-gray-100 py-2">
                 <span className="absolute right-5 
-                top-0 mt-1 hover:text-blue-200 hover:underline 
+                top-0 mt-1 text-lg hover:text-blue-200 hover:underline 
                 cursor-pointer" 
                 onClick={(e) => logout(e) }>Logout
                 </span>
@@ -81,7 +81,7 @@ const Header = (props)=>{
                         className="md:hidden text-sm mt-2 w-14" id="options-menu"/>
                         
 
-                        <div id="mobileMenu" className="hidden origin-top-right 
+                        <div id="mobileMenu" className="hidden z-40 origin-top-right 
                         absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white 
                         dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
 
