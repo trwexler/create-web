@@ -241,7 +241,7 @@ const handleChange = (e) => {
 
                     <div className="bg-white shadow">
 
-                        <img className="w-54 h-36 mx-auto my-2 rounded-full"
+                        <img className="w-54 h-36 mx-auto mb-2 rounded-full"
                         src={`http://localhost:8000/${userProfile.profilePicture}`} alt=""/>
 
                         <h2 className="text-2xl p-3">{userProfile.username}</h2>
@@ -296,11 +296,20 @@ const handleChange = (e) => {
             {/* COMMENT FORM */}
             <form onSubmit={submitHandler}>
 
-                <label className="m-2">
+                {
+                props.profileId == props.currentId ?
+                <label className="m-2 text-2xl">
                 Share your latest with us!
                 </label>
+                :
+                <label className="m-2 text-2xl">
+                Write on {userProfile.username}'s wall!
+                </label>
+
+                }
+
                 <br/>
-                <input onChange={handleChange} 
+                <input className="mt-5" onChange={handleChange} 
                 value={newComments.content} 
                 type="text" name="content"/>
                 <br/>
@@ -318,9 +327,9 @@ const handleChange = (e) => {
                     comments.map((comment, index)=>(
                         
                         <div className="md:w-1/2 md:mx-auto 
-                sm:w-4/5 sm:mx-auto flex flex-col 
-                bg-gray-300 p-2 border-gray-400 
-                border-t-4 border-b-4 m-1 rounded" key={index}>
+                            sm:w-4/5 sm:mx-auto flex flex-col 
+                            bg-gray-300 p-2 border-gray-400 
+                            border-t-4 border-b-4 m-1 rounded" key={index}>
                             {/* Profile Picture/ username div */}
                             <div className="flex">
 

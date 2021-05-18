@@ -54,10 +54,12 @@ return(
         <Header id={props.currentId}/>
 
 
-        <h1>Webs!</h1>
 
         <form className="border bg-white" onSubmit={submitHandler}>
+        
+        <h1 className="text-3xl my-3">Webs</h1>
             <select className="border p-3 m-2" name="web" id="">
+                <option value="" disabled selected>Search by webs</option>
                 <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Writer">Writer</option>
                 <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Writer - Looking for work!">Writer - Looking for work!</option>
                 <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Editor">Editor</option>
@@ -68,14 +70,58 @@ return(
                 <option onClick={(e)=>setSelectedWeb(e.target.value)} value="Looking for feedback">Looking for feedback</option>
             </select>
             <br/>
-            <input type="submit"/>
+            <input type="submit" value="Search"/>
         </form>
-        {selectedWeb}
+        {
+            selectedWeb?
+            <p className="text-2xl my-3">{selectedWeb}</p>
+            :
+            <p>Users</p>
+
+        }
+        
 
         <div>
             {
                 userList.map((user, index)=>(
-                    <p onClick={(e)=>navigate(`/profile/${user._id}/${props.currentId}`)}>{user.username}</p>
+
+                <div>
+                    {/* <p onClick={(e)=>navigate(`/profile/${user._id}/${props.currentId}`)}>{user.username}</p> */}
+
+
+
+                        <div className="md:w-1/2 md:mx-auto 
+                        sm:w-4/5 sm:mx-auto flex flex-col 
+                        bg-gray-300 p-2 border-gray-400 
+                        border-t-4 border-b-4 m-1 rounded" key={index}>
+                        {/* Profile Picture/ username div */}
+                            <div className="flex">
+
+                                <Link to={`/profile/${user._id}/${props.currentId}`}>  
+
+                                <img className="w-16 rounded-3xl"
+                                src={`http://localhost:8000/${user.profilePicture}`}alt=""/>
+
+                                </Link>
+                                
+                                <Link to={`/profile/${user._id}/${props.currentId}`}>
+                                <p className="w-auto 
+                                text-gray-500 
+                                font-semibold mt-2 p-1 ">
+                                {user.username}
+                                </p>
+                                </Link>
+
+                            </div>
+
+                            <p className="text-gray-500 
+                            font-semibold mt-2">
+
+                            {user.bio}
+                            </p>
+
+                        </div>
+                </div>
                 ))
             }
         </div>
