@@ -21,8 +21,7 @@ const Edit = (props)=>{
     ];
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/user/' 
-        + props.currentId, {
+        axios.get('http://localhost:8000/api/user/' + props.currentId, {
             withCredentials:true
         })
             .then((res)=>{
@@ -36,16 +35,14 @@ const Edit = (props)=>{
 
     const submitHandler = (e)=>{
         e.preventDefault();
-        axios.put('http://localhost:8000/api/user/' 
-        + props.currentId, editUser,
+        axios.put('http://localhost:8000/api/user/' + props.currentId, editUser,
             {
                 withCredentials: true
             })
             .then((res)=>{
                 console.log(res.data);
                 setEditUser(res.data);
-                navigate(`/profile/${editUser._id}/
-                ${editUser._id}`)
+                navigate(`/profile/${editUser._id}/${editUser._id}`)
             })
     }
 
@@ -93,7 +90,7 @@ const Edit = (props)=>{
 
                 <br/>
 
-                <input type="submit" value = "Update"/>
+                <input type="submit" value ="Update"/>
 
             </form>
 
