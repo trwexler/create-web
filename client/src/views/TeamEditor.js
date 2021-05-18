@@ -75,7 +75,7 @@ return (
         <CKEditor
             name="content"
             editor={ ClassicEditor }
-            data="<p>Type away, enter a title and hit submit. It all starts with a single key-stroke.</p>"
+            data="<p>Type away, enter a title and hit submit. It all starts with a single key-stroke, after all.</p>"
             onReady={ editor => {
                 // You can store the "editor" and use when it is needed.
                 console.log( 'Editor is ready to use!', editor );

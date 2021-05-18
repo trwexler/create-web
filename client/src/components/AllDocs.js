@@ -79,7 +79,7 @@ const AllDocs = (props) =>{
                     <div className="mx-auto"
                     key={index}>
                         <button className="w-auto" onClick={clickHandler}>{item.name}</button>
-                        <div className="hidden mx-3 px-5 py-2 md:px-10 md:py-5 text-left border" key={index}>
+                        <div className="hidden mx-auto px-5 py-2 md:px-10 md:py-5 md:w-3/4 text-left border" key={index}>
                         {ReactHtmlParser(item.content)}</div>
                     </div>
                     
@@ -93,17 +93,5 @@ const AllDocs = (props) =>{
 
 export default AllDocs;
 
-
-// {
-//     documentList.map((item, index)=>{
-//         let str = item.content;
-//         {/* str = str.toString(); */}
-//         str = str.replace( /(<([^>]+)>)/ig, '');
-//         console.log(str);
-//         item.content = str;
-//     (
-//         <div className="docContent" key={index}>{item.content}</div>
-//     )})
-// }
 
 

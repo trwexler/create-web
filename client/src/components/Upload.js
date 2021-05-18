@@ -57,14 +57,17 @@ const Upload = (props)=> {
 
     <div>
 
+        
         <img className="w-54 h-36 mx-auto my-2 rounded-3xl"
-        src={`http://localhost:8000/${currentUser.profilePicture}`} alt=""/>
+        src={`http://localhost:8000/${currentUser.profilePicture}`} 
+        alt="Add a profile picture!"/>
 
         <div className="file-upload w-56 mx-auto h-full">
 
             <div className="h-10 relative w-56">
             
-                <input className="z-0 absolute left-0 h-10 w-36 m-0 p-1 text-center placeholder-black bg-white cursor-pointer" type="text" placeholder="Change Picture" />
+                <input className="z-0 absolute left-0 h-10 w-36 m-0 p-1 text-center placeholder-black 
+                bg-white cursor-pointer" type="text" placeholder="Change Picture" />
 
                 <input ref={profilePicture} 
                 type="file" name="profilePicture"  

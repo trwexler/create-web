@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
   credentials: true,
-  origin: "*"
+  origin: "http://localhost:3000"
 }));
 
 app.use(cookieParser());
