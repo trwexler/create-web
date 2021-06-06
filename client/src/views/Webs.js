@@ -110,32 +110,32 @@ return(
     </div> */}
 
 
-            <select className="border p-3 m-2 cursor-pointer" name="web" id="">
+            <select className="border p-3 m-2 hover:cursor-pointer" name="web" id="">
 
-                <option value="" default>Search by webs</option>
+                <option className="hover:cursor-pointer" value="" default>Search by webs</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Writer">Writer</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Writer - Looking for work!">Writer - Looking for work!</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Editor">Editor</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Editor - Looking for work!">Editor - Looking for work!</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Looking for team-writing">Looking for team-writing</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Publisher">Publisher</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Just browsing!">Just browsing!</option>
 
-                <option onClick={(e)=>setSelectedWeb(e.target.value)} 
+                <option className="hover:cursor-pointer" onClick={(e)=>setSelectedWeb(e.target.value)} 
                 value="Looking for feedback">Looking for feedback</option>
 
             </select>

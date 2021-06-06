@@ -89,7 +89,7 @@ const Header = (props)=>{
                             aria-orientation="vertical" aria-labelledby="options-menu">
 
                                 <Link to={`/feed/${props.id}`} 
-                                className="block px-4 py-2 text-md text-gray-700 
+                                className="cursor-pointer block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 
                                 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem"> 
                                     <span className="flex flex-col">
@@ -99,7 +99,7 @@ const Header = (props)=>{
                                     </span>
                                 </Link>
 
-                                <Link to={`/profile/${props.id}/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
+                                <Link to={`/profile/${props.id}/${props.id}`} className="cursor-pointer block block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 
                                 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
                                     <span className="flex flex-col">
@@ -109,7 +109,7 @@ const Header = (props)=>{
                                     </span>
                                 </Link>
 
-                                <Link to={`/webs/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
+                                <Link to={`/webs/${props.id}`} className="cursor-pointer block block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100
                                 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
                                     <span className="flex flex-col">
@@ -119,7 +119,7 @@ const Header = (props)=>{
                                     </span>
                                 </Link>
 
-                                <Link to={`/teameditor/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
+                                <Link to={`/teameditor/${props.id}`} className="cursor-pointer block block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100
                                 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
                                     <span className="flex flex-col">
@@ -129,7 +129,7 @@ const Header = (props)=>{
                                     </span>
                                 </Link>
 
-                                <Link to={`/alldocs/${props.id}`} className="block block px-4 py-2 text-md text-gray-700 
+                                <Link to={`/alldocs/${props.id}`} className="cursor-pointer block block px-4 py-2 text-md text-gray-700 
                                 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100
                                 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
                                     <span className="flex flex-col">

@@ -23,13 +23,10 @@ app.use(cors({
   credentials: true,
   origin: "http://localhost:3000"
 }));
+//also getting lockfile@1 errors and fsevent errors periodically that others are not. Had to update npm on the deployment/ubuntu terminal to get it working at all
 
 app.use(cookieParser());
 app.use(morgan('dev'));
-
-
-
-
 
 
 
