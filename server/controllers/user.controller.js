@@ -1,11 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const express = require('express');
-const app = express();
-const fileUpload = require('express-fileupload');
-app.use(express.static('public')); //to access the files in public folder
-app.use(fileUpload());
+
 
 module.exports = {
     // register new user accounts
