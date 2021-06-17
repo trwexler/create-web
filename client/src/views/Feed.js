@@ -121,7 +121,7 @@ const Feed = (props)=>{
 
                             <Link to={`/profile/${aPost.user_id._id}/${currentUser._id}`}>    
                             <img className="w-16 my-2 rounded-3xl"
-                            src={`http://localhost:8000/${aPost.user_id.profilePicture}`} alt=""/>
+                            src={`http://localhost:8000/image/${aPost.user_id.profilePicture}`} alt=""/>
                             </Link>
 
                             :

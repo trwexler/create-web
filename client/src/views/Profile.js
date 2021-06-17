@@ -242,7 +242,7 @@ const handleChange = (e) => {
                     <div className="bg-white shadow">
 
                         <img className="w-54 h-36 mx-auto mb-2 rounded-full"
-                        src={`http://localhost:8000/${userProfile.profilePicture}`} alt=""/>
+                        src={`http://localhost:8000/image/${userProfile.profilePicture}`} alt=""/>
 
                         <h2 className="text-2xl p-3">{userProfile.username}</h2>
                         <Link to={`/alldocs/${userProfile._id}`}>
@@ -336,7 +336,7 @@ const handleChange = (e) => {
                                 <Link to={`/profile/${comment.posting_user_id}/${currentUser._id}`}>  
 
                                 <img className="w-16 rounded-3xl"
-                                src={`http://localhost:8000/${comment.posting_profilePicture}`}alt=""/>
+                                src={`http://localhost:8000/image/${comment.posting_profilePicture}`}alt=""/>
 
                                 </Link>
                                 

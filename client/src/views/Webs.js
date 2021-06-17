@@ -172,7 +172,7 @@ return(
                                 <Link to={`/profile/${user._id}/${props.currentId}`}>  
 
                                 <img className="w-16 rounded-3xl"
-                                src={`http://localhost:8000/${user.profilePicture}`}alt=""/>
+                                src={`http://localhost:8000/image/${user.profilePicture}`}alt=""/>
 
                                 </Link>
                                 

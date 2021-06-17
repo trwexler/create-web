@@ -37,7 +37,7 @@ const Upload = (props)=> {
         .then(res => {
             console.log(res.data);
             getData({ name: res.data.name,
-                path: 'http://localhost:8000/' + res.data.path
+                path: 'http://localhost:8000/public/' + res.data.path
             })
             // setChangePic({
             //     ...currentUser,
@@ -50,7 +50,9 @@ const Upload = (props)=> {
             console.log(res.data.path);
             console.log(currentUser);
         })
-        .catch(err => console.log(err))}
+        .catch(err => console.log(err))
+    
+    }
 
 
     return (
@@ -59,7 +61,7 @@ const Upload = (props)=> {
 
         
         <img className="w-54 h-36 mx-auto my-2 rounded-3xl"
-        src={`http://localhost:8000/${currentUser.profilePicture}`} 
+        src={`http://localhost:8000/image/${currentUser.profilePicture}`} 
         alt="Add a profile picture!"/>
 
         <div className="file-upload w-56 mx-auto h-full">
