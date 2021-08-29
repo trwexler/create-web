@@ -106,7 +106,7 @@ const Feed = (props)=>{
 
             post.map((aPost, index)=>(
                 
-                <div className="md:w-1/2 md:mx-auto 
+                <div className="md:w-1/3 md:mx-auto 
                 sm:w-4/5 sm:mx-auto flex flex-col 
                 bg-gray-300 p-2 border-gray-400 
                 border-t-4 border-b-4 m-1 rounded" 

@@ -46,9 +46,9 @@ const Header = (props)=>{
 
     return(
         <>
-            <nav className="bg-gray-100 py-2">
+            <nav className="bg-gray-200 py-2">
                 <span className="absolute right-5 
-                top-0 mt-1 text-lg hover:text-blue-200 hover:underline 
+                top-0 mt-1 text-lg hover:text-blue-500 hover:underline 
                 cursor-pointer" 
                 onClick={(e) => logout(e) }>Logout
                 </span>
@@ -61,19 +61,19 @@ const Header = (props)=>{
                     <h1 className="md:mx-0 cursor-default text-3xl mx-auto p-2 mt-2">create(Web)</h1>
                     
                     <Link to={`/feed/${props.id}`}>
-                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Home</li></Link>
+                    <li className="hidden md:flex mt-6 hover:text-blue-500 hover:underline cursor-pointer">Home</li></Link>
 
                     <Link to={`/profile/${props.id}/${props.id}`}>
-                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Profile</li></Link>
+                    <li className="hidden md:flex mt-6 hover:text-blue-500 hover:underline cursor-pointer">Profile</li></Link>
 
                     <Link to={`/webs/${props.id}`}>
-                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Webs</li></Link>
+                    <li className="hidden md:flex mt-6 hover:text-blue-500 hover:underline cursor-pointer">Webs</li></Link>
 
                     <Link to={`/teameditor/${props.id}`}>
-                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Write</li></Link>
+                    <li className="hidden md:flex mt-6 hover:text-blue-500 hover:underline cursor-pointer">Write</li></Link>
 
                     <Link to={`/alldocs/${props.id}`}>
-                    <li className="hidden md:flex mt-6 hover:text-blue-200 hover:underline cursor-pointer">Collection</li></Link>
+                    <li className="hidden md:flex mt-6 hover:text-blue-500 hover:underline cursor-pointer">Collection</li></Link>
 
                     <div className="relative cursor-pointer inline-block text-left">
                     

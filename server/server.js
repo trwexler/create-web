@@ -5,8 +5,8 @@ const cors = require('cors');
 const socketio = require('socket.io');
 const fileUpload = require('express-fileupload');
 const cookieParser = require("cookie-parser");
-const morgan = require('morgan');
-const _ = require('lodash');
+// const morgan = require('morgan');
+// const _ = require('lodash');
 app.use('/image', express.static('public')); //to access the files in public folder
 
 app.use(fileUpload({
@@ -14,7 +14,6 @@ app.use(fileUpload({
 }));
 
 const port = process.env.MY_PORT;
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +25,7 @@ app.use(cors({
 //also getting lockfile@1 errors and fsevent errors periodically that others are not. Had to update npm on the deployment/ubuntu terminal to get it working at all
 
 app.use(cookieParser());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 
 
@@ -51,10 +50,6 @@ app.use(morgan('dev'));
 //         return res.send({name: myFile.name, path: `/${myFile.name}`});
 //     });
 // })
-
-
-
-
 
 
 
